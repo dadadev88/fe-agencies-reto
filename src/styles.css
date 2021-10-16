@@ -1,0 +1,23 @@
+:root {
+	--cprimary: #012d74;
+	--csecundary: #ff7800;
+	--cgray: #a6a6a6;
+	--clgray: #f0f0f0;
+	--cfmprimary: #2196f3;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	outline: 0;
+	font-family: 'BCP Regular', 'Courier New', Courier, monospace;
+}
+
+h1, h2, h3 {
+	font-family: 'BCP Bold' ,'Courier New', Courier, monospace;
+}
+
+.bcp-container {
+	margin-top: 4rem;
+}
