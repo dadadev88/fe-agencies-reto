@@ -1,0 +1,15 @@
+@font-face {
+	font-family: 'BCP Bold';
+	src: url('bcp-bold.woff');
+	font-style: normal;
+}
+@font-face {
+	font-family: 'BCP Regular';
+	src: url('bcp-regular.woff');
+	font-style: normal;
+}
+@font-face {
+	font-family: 'BCP Italic';
+	src: url('bcp-italic.woff');
+	font-style: italic;
+}
