@@ -1,0 +1,12 @@
+.bcp-agencies-container {
+	padding-top: 1rem;
+}
+
+@media (min-width: 768px) {
+
+	.bcp-agencies-container {
+		width: 70%;
+		margin: auto;
+	}
+
+}
