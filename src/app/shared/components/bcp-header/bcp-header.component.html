@@ -1,0 +1,11 @@
+<header class="bcp-header">
+	<nav class="bcp-header__nav">
+		<ul class="bcp-header__list">
+			<li *ngFor="let opt of options;"
+				[routerLink]="opt.toRoute"
+				class="bcp-header__list-item">
+				{{ opt.description }}
+			</li>
+		</ul>
+	</nav>
+</header>

@@ -1,0 +1,21 @@
+div.bcp-ftext {
+	position: relative;
+	margin-bottom: 20px;
+}
+div.bcp-ftext.bcp-ftext--w100 input.bcp-ftext__input {
+	width: 100%;
+}
+
+div.bcp-ftext label.bcp-ftext__label {
+	margin-bottom: 0.25rem;
+	display: block;
+	font-size: 14px;
+	color: var(--cfmprimary);
+}
+div.bcp-ftext input.bcp-ftext__input {
+	border: none;
+	border-bottom: 2px solid var(--cfmprimary);
+	height: 35px;
+	padding: 0 .25rem;
+	font-size: 14px;
+}

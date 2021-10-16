@@ -1,0 +1,14 @@
+.bcp-button {
+	min-width: 120px;
+	border: none;
+	padding: .25rem .5rem;
+	height: 2.5rem;
+	font-weight: 700;
+	border-radius: 3px;
+	box-shadow: 3px 3px 1px 0px #b5b5b5;
+	cursor: pointer;
+}
+.bcp-button.bcp-button--primary {
+	background-color: var(--cfmprimary);
+	color: #fff;
+}

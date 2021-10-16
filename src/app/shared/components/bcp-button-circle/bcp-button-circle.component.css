@@ -1,0 +1,12 @@
+.bcp-btn-circle {
+	height: 60px;
+	width: 60px;
+	border: 0;
+	padding: 1rem;
+	border-radius: 50%;
+	box-shadow: 3px 3px 1px 0px #b5b5b5;
+}
+
+.bcp-btn-circle .bcp-btn-primary {
+	background-color: var(--csecundary);
+}

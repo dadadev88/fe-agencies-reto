@@ -1,0 +1,29 @@
+header.bcp-header {
+	position: fixed;
+	top: 0;
+	right: 0;
+	height: 4rem;
+	width: 100vw;
+	background-color: var(--cprimary);
+	color: #fff;
+	display: flex;
+	align-items: center;
+	z-index: 3;
+}
+
+nav.bcp-header__nav {
+	width: 100%;
+	display: flex;
+	justify-content: space-evenly;
+}
+
+header.bcp-header ul.bcp-header__list {
+	display: flex;
+}
+
+header.bcp-header ul.bcp-header__list li.bcp-header__list-item {
+	font-weight: bold;
+	list-style: none;
+	cursor: pointer;
+	padding: 0 1rem;
+}
