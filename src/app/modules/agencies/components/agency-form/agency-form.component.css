@@ -1,3 +1,7 @@
 .agency-form {
 	padding: 1rem .5rem;
 }
+
+.agency-form__footer {
+	text-align: center;
+}

@@ -13,6 +13,6 @@ export class AgenciesComponent {
 		{ description: 'Agencias', toRoute: ['/agencias'] }
 	];
 
-	constructor(public agenciesState: AgenciesState) {}
+	constructor(public state: AgenciesState) {}
 
 }

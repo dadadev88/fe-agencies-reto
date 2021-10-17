@@ -10,12 +10,12 @@ import { AgenciesState } from '../../services/agencies-state.service';
 export class AgenciesDetailPageComponent implements OnInit {
 
 	constructor(
-		public agenciesState: AgenciesState,
+		public state: AgenciesState,
 		private router: Router
 	) {}
 
 	ngOnInit() {
-		!this.agenciesState.getAgency() && this.router.navigate(['/agencias/listado']);
+		!this.state.getAgency() && this.router.navigate(['/agencias/listado']);
 	}
 	
  }

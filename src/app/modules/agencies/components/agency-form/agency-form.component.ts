@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PATTERN_ADDRESS, PATTERN_NAME, PATTERN_POS_NEG, PATTERN_TEXT } from 'src/app/core/constants/patterns-regexp';
 import { AgenciesController } from '../../controllers/agencies.controller';
 import { Agency } from '../../interfaces/agency-list-item.interface';
 
@@ -21,11 +22,11 @@ export class AgencyFormComponent implements OnInit {
 		private router: Router
 	) {
 		this.formAgency = this.formBuilder.group({
-			agencia: ['', [Validators.required]],
-			direccion: ['', [Validators.required]],
-			distrito: ['', [Validators.required]],
-			lat: ['', [Validators.required]],
-			lon: ['', [Validators.required]]
+			agencia: ['', [Validators.required, Validators.pattern(PATTERN_NAME)]],
+			direccion: ['', [Validators.required, Validators.pattern(PATTERN_ADDRESS)]],
+			distrito: ['', [Validators.required, Validators.pattern(PATTERN_TEXT)]],
+			lat: ['', [Validators.required, Validators.pattern(PATTERN_POS_NEG)]],
+			lon: ['', [Validators.required, Validators.pattern(PATTERN_POS_NEG)]]
 		});
 	}
 	
@@ -37,7 +38,7 @@ export class AgencyFormComponent implements OnInit {
 
 	onSubmit() {
 		if (this.formAgency.valid) {
-			this.controller.updateAgency(this.formAgency.value);
+			this.controller.updateAgency({...this.agency, ...this.formAgency.value});
 			this.router.navigate(['/agencias', 'listado']);
 		}
 	}

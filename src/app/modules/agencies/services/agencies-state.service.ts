@@ -7,6 +7,7 @@ export class AgenciesState {
 	private isLoading: boolean = true;
 	private agencies: Agency[] = [];
 	private agency: Agency | null = null;
+	public isFormMode: boolean = true;
 
 	setLoading(value: boolean) {
 		this.isLoading = value;
@@ -30,5 +31,9 @@ export class AgenciesState {
 
 	setAgency(agency: Agency) {
 		this.agency = agency;
+	}
+
+	setFormMode(mode: boolean) {
+		this.isFormMode = mode;
 	}
 }

@@ -1,9 +1,9 @@
-<app-bcp-loading *ngIf="agenciesState.getLoading(); else agenciesContent"></app-bcp-loading>
+<app-bcp-loading *ngIf="state.getLoading(); else agenciesContent"></app-bcp-loading>
 <ng-template #agenciesContent>
 	<div class="agencies-list-container">
 		<section class="agency-list">
-			<app-agency-list-item *ngIf="agenciesState.getAgencies().length; else notFoundAgencies"
-				[agencies]="agenciesState.getAgencies()"
+			<app-agency-list-item *ngIf="state.getAgencies().length; else notFoundAgencies"
+				[agencies]="state.getAgencies()"
 				(toDetail)="goToDetail($event)"></app-agency-list-item>
 			<ng-template #notFoundAgencies>
 				<h3 class="agency-list__notfound">No existen agencias según valor indicado</h3>

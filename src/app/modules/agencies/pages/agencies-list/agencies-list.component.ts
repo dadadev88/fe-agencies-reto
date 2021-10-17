@@ -12,7 +12,7 @@ import { AgenciesState } from '../../services/agencies-state.service';
 export class AgenciesListPageComponent implements OnInit {
 
 	constructor(
-		public agenciesState: AgenciesState,
+		public state: AgenciesState,
 		public agenciesController: AgenciesController,
 		private router: Router
 	) {}
@@ -22,7 +22,8 @@ export class AgenciesListPageComponent implements OnInit {
 	}
 
 	goToDetail(agency: Agency) {
-		this.agenciesState.setAgency(agency);
+		this.state.setAgency(agency);
+		this.state.setFormMode(false);
 		this.router.navigate(['/agencias/detalle']);
 	}
 

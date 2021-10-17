@@ -7,4 +7,5 @@ export interface Agency {
 	lat?: number;
 	lon?: number;
 	img?: string;
+	id?: string;
 }

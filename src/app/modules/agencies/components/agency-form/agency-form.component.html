@@ -6,6 +6,8 @@
 		<app-bcp-text name="distrito" label="Distrito"></app-bcp-text>
 		<app-bcp-text name="lat" label="Latitud"></app-bcp-text>
 		<app-bcp-text name="lon" label="Longitud"></app-bcp-text>
-		<app-bcp-button [isDisabled]="formAgency.invalid" text="Actualizar"></app-bcp-button>
+		<div class="agency-form__footer">
+			<app-bcp-button [isDisabled]="formAgency.invalid" text="Actualizar"></app-bcp-button>
+		</div>
 	</form>
 </div>

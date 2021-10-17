@@ -7,7 +7,7 @@
 				{{ opt.description }}
 			</li>
 		</ul>
-		<div class="bcp-header__form">
+		<div class="bcp-header__form" *ngIf="isFormMode">
 			<app-bcp-text
 				(keyupEmmiter)="keyupInputSearch($event)"
 				[hasFG]="false"
