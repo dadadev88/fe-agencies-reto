@@ -1,4 +1,4 @@
-export interface AgencyListItem {
+export interface Agency {
 	agencia: string;
 	direccion: string;
 	departamento: string;
