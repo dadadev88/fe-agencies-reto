@@ -19,7 +19,11 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@shared/*": ["src/app/shared/*"],
+      "@cforms/*": ["src/app/shared/components/forms/*"],
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
