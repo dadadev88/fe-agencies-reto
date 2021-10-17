@@ -1,6 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { AgencyListItem } from '../../interfaces/agency-list-item.interface';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Agency } from '../../interfaces/agency-list-item.interface';
 
 @Component({
 	selector: 'app-agency-list-item',
@@ -12,13 +11,16 @@ export class AgencyListItemComponent {
 	defaultImg: string = 'assets/images/agency.svg';
 
 	@Input()
-	agencies: AgencyListItem[] = [];
+	agencies: Agency[] = [];
 	@Input()
 	title?: string;
 
-	constructor(private router: Router) {}
+	@Output()
+	toDetail = new EventEmitter<Agency>();
 
-	goToDetail(agency: AgencyListItem) {
-		this.router.navigate(['/agencias/detalle', agency.agencia]);
+	constructor() {}
+
+	goToDetail(agency: Agency) {
+		this.toDetail.emit(agency);
 	}
 }

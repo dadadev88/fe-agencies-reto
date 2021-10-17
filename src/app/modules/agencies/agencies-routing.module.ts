@@ -8,7 +8,7 @@ const agenciesRoutes: Routes = [
 	{ path: '', component: AgenciesComponent, children: [
 		{ path: '', pathMatch: 'full', redirectTo: 'listado' },
 		{ path: 'listado', component: AgenciesListPageComponent },
-		{ path: 'detalle/:name', component: AgenciesDetailPageComponent }
+		{ path: 'detalle', component: AgenciesDetailPageComponent }
 	]}
 ];
 

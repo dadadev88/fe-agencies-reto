@@ -10,6 +10,8 @@ export class BCPButtonComponent implements OnInit {
 	@Input()
 	text: string = 'Botón';
 	@Input()
+	isSubmit?: boolean = true;
+	@Input()
 	style: 'primary' | 'secondary' = 'primary';
 
 	constructor() { }

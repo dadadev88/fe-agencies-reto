@@ -4,23 +4,31 @@ import { Agency } from '../interfaces/agency-list-item.interface';
 @Injectable()
 export class AgenciesState {
 
-	public isLoading: boolean = true;
-	public agencies: Agency[] = [];
-	public _agency: Agency | null = null;
+	private isLoading: boolean = true;
+	private agencies: Agency[] = [];
+	private agency: Agency | null = null;
 
 	setLoading(value: boolean) {
 		this.isLoading = value;
+	}
+
+	getLoading() {
+		return this.isLoading;
 	}
 	
 	setAgencies(agencies: Agency[]) {
 		this.agencies = agencies
 	}
+	
+	getAgencies() {
+		return this.agencies;
+	}
 
-	get agency() {
+	getAgency() {
 		return this.agency;
 	}
 
-	set agency(agency: Agency) {
+	setAgency(agency: Agency) {
 		this.agency = agency;
 	}
 }

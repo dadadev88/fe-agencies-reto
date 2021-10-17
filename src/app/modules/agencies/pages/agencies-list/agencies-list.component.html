@@ -1,8 +1,10 @@
-<app-bcp-loading *ngIf="agenciesState.isLoading; else agenciesContent"></app-bcp-loading>
+<app-bcp-loading *ngIf="agenciesState.getLoading(); else agenciesContent"></app-bcp-loading>
 <ng-template #agenciesContent>
 	<div class="agencies-list-container">
 		<section class="agency-list">
-			<app-agency-list-item [agencies]="agenciesState.agencies"></app-agency-list-item>
+			<app-agency-list-item
+				[agencies]="agenciesState.getAgencies()"
+				(toDetail)="goToDetail($event)"></app-agency-list-item>
 		</section>
 	</div>
 </ng-template>

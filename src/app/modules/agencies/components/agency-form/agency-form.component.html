@@ -1,9 +1,21 @@
 
 <div class="agency-form">
-	<app-bcp-text [isW100]="true" label="Nombre de agencia"></app-bcp-text>
-	<app-bcp-text [isW100]="true" label="Dirección"></app-bcp-text>
-	<app-bcp-text [isW100]="true" label="Distrito"></app-bcp-text>
-	<app-bcp-text [isW100]="true" label="Latitud"></app-bcp-text>
-	<app-bcp-text [isW100]="true" label="Longitud"></app-bcp-text>
-	<app-bcp-button></app-bcp-button>
+	<div [formGroup]="formAgency" (ngSubmit)="onSubmit($event)">
+		<app-bcp-text
+			name="agencia" label="Nombre de agencia">
+		</app-bcp-text>
+		<app-bcp-text
+			name="direccion" label="Dirección">
+		</app-bcp-text>
+		<app-bcp-text
+			name="distrito" label="Distrito">
+		</app-bcp-text>
+		<app-bcp-text
+			name="lat" label="Latitud">
+		</app-bcp-text>
+		<app-bcp-text
+			name="lon" label="Longitud">
+		</app-bcp-text>
+	</div>
+	<app-bcp-button text="Actualizar"></app-bcp-button>
 </div>

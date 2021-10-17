@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AgenciesController } from '../../controllers/agencies.controller';
+import { Agency } from '../../interfaces/agency-list-item.interface';
 import { AgenciesState } from '../../services/agencies-state.service';
 
 @Component({
@@ -11,11 +13,17 @@ export class AgenciesListPageComponent implements OnInit {
 
 	constructor(
 		public agenciesState: AgenciesState,
-		public agenciesController: AgenciesController
+		public agenciesController: AgenciesController,
+		private router: Router
 	) {}
 
 	ngOnInit() {
 		this.agenciesController.getAll();
+	}
+
+	goToDetail(agency: Agency) {
+		this.agenciesState.setAgency(agency);
+		this.router.navigate(['/agencias/detalle']);
 	}
 
 }

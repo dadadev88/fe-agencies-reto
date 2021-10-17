@@ -1,4 +1,7 @@
 <div [ngClass]="['bcp-ftext', isW100 ? 'bcp-ftext--w100' : '']">
 	<label class="bcp-ftext__label" for="" *ngIf="label">{{ label }}</label>
-	<input type="text" class="bcp-ftext__input">
+	<input
+		type="text"
+		class="bcp-ftext__input"
+		[formControlName]="name">
 </div>

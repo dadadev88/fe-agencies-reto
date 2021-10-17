@@ -15,6 +15,7 @@ import { AgenciesListPageComponent } from './pages/agencies-list/agencies-list.c
 import { AgenciesService } from './services/agencies.service';
 import { AgenciesState } from './services/agencies-state.service';
 import { AgenciesController } from './controllers/agencies.controller';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const agenciesPagesComponents = [
 	AgenciesDetailPageComponent,
@@ -33,7 +34,8 @@ const agenciesComponents = [
 		AgenciesRoutingModule,
 		SharedModule,
 		HttpClientModule,
-		RouterModule
+		RouterModule,
+		ReactiveFormsModule
 	],
 	providers: [
 		AgenciesService,

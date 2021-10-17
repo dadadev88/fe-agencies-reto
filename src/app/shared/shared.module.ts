@@ -6,6 +6,7 @@ import { BCPButtonCircleComponent } from './components/bcp-button-circle/bcp-but
 import { BCPTextComponent } from '@cforms/bcp-text/bcp-text.component';
 import { BCPButtonComponent } from './components/bcp-button/bcp-button.component';
 import { BCPLoadingComponent } from './components/bcp-loading/bcp-loading.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
 	declarations: [
@@ -17,7 +18,8 @@ import { BCPLoadingComponent } from './components/bcp-loading/bcp-loading.compon
 	],
 	imports: [
 		CommonModule,
-		RouterModule
+		RouterModule,
+		ReactiveFormsModule
 	],
 	exports: [
 		BCPHeaderComponent,

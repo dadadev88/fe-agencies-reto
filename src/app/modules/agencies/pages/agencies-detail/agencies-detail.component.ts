@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { AgenciesState } from '../../services/agencies-state.service';
 
 @Component({
 	selector: 'app-agencies-detail-page',
@@ -8,12 +9,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AgenciesDetailPageComponent implements OnInit {
 
-	constructor(private router: ActivatedRoute) {}
+	constructor(
+		public agenciesState: AgenciesState,
+		private router: Router
+	) {}
 
 	ngOnInit() {
-		this.router.params.subscribe(params => {
-			console.log("params", params);
-		})
+		!this.agenciesState.getAgency() && this.router.navigate(['/agencias/listado']);
 	}
 	
  }
