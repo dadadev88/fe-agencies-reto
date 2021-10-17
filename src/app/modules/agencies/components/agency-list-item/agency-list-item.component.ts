@@ -10,13 +10,10 @@ export class AgencyListItemComponent {
 
 	defaultImg: string = 'assets/images/agency.svg';
 
-	@Input()
-	agencies: Agency[] = [];
-	@Input()
-	title?: string;
+	@Input() agencies: Agency[] = [];
+	@Input() title?: string;
 
-	@Output()
-	toDetail = new EventEmitter<Agency>();
+	@Output() toDetail = new EventEmitter<Agency>();
 
 	constructor() {}
 

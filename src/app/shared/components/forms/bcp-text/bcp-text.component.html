@@ -1,7 +1,17 @@
-<div [ngClass]="['bcp-ftext', isW100 ? 'bcp-ftext--w100' : '']">
+<div [ngClass]="[
+		'bcp-ftext',
+		isW100 ? 'bcp-ftext--w100' : '',
+		!addBM ? 'bcp-ftext--womb' : ''
+	]">
 	<label class="bcp-ftext__label" for="" *ngIf="label">{{ label }}</label>
-	<input
+	<input *ngIf="hasFG"
 		type="text"
 		class="bcp-ftext__input"
+		[placeholder]="placeholder"
 		[formControlName]="name">
+	<input *ngIf="!hasFG"
+		type="text"
+		class="bcp-ftext__input"
+		[placeholder]="placeholder"
+		(keyup)="onKeyup($event)">
 </div>

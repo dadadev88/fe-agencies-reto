@@ -2,9 +2,12 @@
 <ng-template #agenciesContent>
 	<div class="agencies-list-container">
 		<section class="agency-list">
-			<app-agency-list-item
+			<app-agency-list-item *ngIf="agenciesState.getAgencies().length; else notFoundAgencies"
 				[agencies]="agenciesState.getAgencies()"
 				(toDetail)="goToDetail($event)"></app-agency-list-item>
+			<ng-template #notFoundAgencies>
+				<h3 class="agency-list__notfound">No existen agencias según valor indicado</h3>
+			</ng-template>
 		</section>
 	</div>
 </ng-template>

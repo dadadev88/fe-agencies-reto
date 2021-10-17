@@ -15,6 +15,7 @@ nav.bcp-header__nav {
 	width: 100%;
 	display: flex;
 	justify-content: space-evenly;
+	align-items: center;
 }
 
 header.bcp-header ul.bcp-header__list {

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ControlContainer, FormGroupDirective } from '@angular/forms';
 
 @Component({
@@ -9,18 +9,20 @@ import { ControlContainer, FormGroupDirective } from '@angular/forms';
 		{ provide: ControlContainer, useExisting: FormGroupDirective }
 	]
 })
-export class BCPTextComponent implements OnInit {
+export class BCPTextComponent {
 
-	@Input()
-	label: string = '';
-	@Input()
-	name: string = '';
-	@Input()
-	isW100?: boolean = true;
+	@Input() label: string = '';
+	@Input() name: string = '';
+	@Input() isW100?: boolean = true;
+	@Input() placeholder: string = '';
+	@Input() hasFG: boolean = true;
+	@Input() addBM: boolean = true;
 
-	constructor() { }
+	@Output() keyupEmmiter: EventEmitter<string> = new EventEmitter<string>();
 
-	ngOnInit(): void {
+	onKeyup(e: KeyboardEvent) {
+		const input = e.target as HTMLInputElement;
+		this.keyupEmmiter.emit(input.value);
 	}
 
 }

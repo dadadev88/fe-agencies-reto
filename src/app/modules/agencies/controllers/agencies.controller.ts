@@ -27,7 +27,7 @@ export class AgenciesController extends AgenciesStorageController {
 			this.agenciesState.setAgencies(agenciesLS);
 		}
 		
-		setTimeout(() => this.agenciesState.setLoading(false), 1000);
+		setTimeout(() => this.agenciesState.setLoading(false), 500);
 	}
 
 
@@ -40,5 +40,19 @@ export class AgenciesController extends AgenciesStorageController {
 		const indexToUpdate = allAgencies.findIndex(ag => ag.agencia === agency.agencia);
 		allAgencies[indexToUpdate] = agency;
 		this.saveOnLS(allAgencies);
+	}
+
+	searchAgencies(value: string) {
+		const allAgencies = [...this.getAllFromLS()];
+		let newAgencies: Agency[] = value.trim() !== '' ? this.filterAgencies(allAgencies, value.toLowerCase()) : allAgencies;
+		this.agenciesState.setAgencies(newAgencies);
+	}
+	
+	private filterAgencies(agencies: Agency[], value: string) {
+		return agencies.filter(a => (
+			a.agencia.toLowerCase().includes(value) ||
+			a.distrito?.toLowerCase().includes(value) ||
+			a.direccion?.toLowerCase().includes(value)
+		));
 	}
 }

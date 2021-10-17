@@ -11,8 +11,7 @@ import { Agency } from '../../interfaces/agency-list-item.interface';
 })
 export class AgencyFormComponent implements OnInit {
 
-	@Input()
-	agency?: Agency | null = null;
+	@Input() agency?: Agency | null = null;
 
 	formAgency: FormGroup = new FormBuilder().group({});
 

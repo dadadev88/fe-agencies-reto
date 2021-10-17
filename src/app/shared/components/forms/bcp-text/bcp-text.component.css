@@ -2,6 +2,11 @@ div.bcp-ftext {
 	position: relative;
 	margin-bottom: 20px;
 }
+div.bcp-ftext.bcp-ftext--womb {
+	border-bottom: 2px solid transparent;
+	margin-bottom: 0;
+}
+
 div.bcp-ftext.bcp-ftext--w100 input.bcp-ftext__input {
 	width: 100%;
 }
@@ -12,10 +17,17 @@ div.bcp-ftext label.bcp-ftext__label {
 	font-size: 14px;
 	color: var(--cfmprimary);
 }
-div.bcp-ftext input.bcp-ftext__input {
+div.bcp-ftext input.bcp-ftext__input,
+div.bcp-ftext.bcp-ftext--womb input.bcp-ftext__input {
 	border: none;
 	border-bottom: 2px solid var(--cfmprimary);
 	height: 35px;
 	padding: 0 .25rem;
 	font-size: 14px;
+}
+div.bcp-ftext.bcp-ftext--womb input.bcp-ftext__input {
+	background-color: transparent;
+}
+div.bcp-ftext.bcp-ftext--womb input.bcp-ftext__input:focus {
+	background-color: #fff;
 }

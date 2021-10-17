@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { AgenciesController } from 'src/app/modules/agencies/controllers/agencies.controller';
 import { BCPHeaderOptions } from '../../interfaces/bcp-header.interface';
 
 @Component({
@@ -8,7 +9,12 @@ import { BCPHeaderOptions } from '../../interfaces/bcp-header.interface';
 })
 export class BCPHeaderComponent {
 
-	@Input()
-	options: BCPHeaderOptions[] = [];
+	@Input() options: BCPHeaderOptions[] = [];
+
+	constructor(private controller: AgenciesController) {}
+	
+	keyupInputSearch(value: string) {
+		this.controller.searchAgencies(value);
+	}
 	
 }

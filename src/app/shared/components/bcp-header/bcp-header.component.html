@@ -7,5 +7,12 @@
 				{{ opt.description }}
 			</li>
 		</ul>
+		<div class="bcp-header__form">
+			<app-bcp-text
+				(keyupEmmiter)="keyupInputSearch($event)"
+				[hasFG]="false"
+				[addBM]="false"
+				placeholder="Buscar agencia"></app-bcp-text>
+		</div>
 	</nav>
 </header>
