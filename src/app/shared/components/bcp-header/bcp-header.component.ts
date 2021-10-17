@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { BCPHeaderOptions } from './bcp-header.model';
+import { Component, Input } from '@angular/core';
+import { BCPHeaderOptions } from '../../interfaces/bcp-header.interface';
 
 @Component({
 	selector: 'app-bcp-header',
@@ -8,10 +8,7 @@ import { BCPHeaderOptions } from './bcp-header.model';
 })
 export class BCPHeaderComponent {
 
-	options: Array<BCPHeaderOptions> = [
-		{ description: 'Agencias', toRoute: ['/agencias'] },
-		{ description: 'Favoritas', toRoute: ['/agencias', 'favoritas'] },
-		{ description: 'Detalle', toRoute: ['/agencias', 'detalle'] }
-	];
+	@Input()
+	options: BCPHeaderOptions[] = [];
 	
 }
