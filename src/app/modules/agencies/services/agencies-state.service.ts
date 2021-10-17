@@ -17,7 +17,7 @@ export class AgenciesState {
 	}
 	
 	setAgencies(agencies: Agency[]) {
-		this.agencies = agencies
+		this.agencies = agencies;
 	}
 	
 	getAgencies() {

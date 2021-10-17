@@ -1,5 +1,6 @@
 <button
 	[type]="isSubmit ? 'submit' : 'button'"
-	[ngClass]="['bcp-button', 'bcp-button--' + style]">
+	[ngClass]="['bcp-button', 'bcp-button--' + style]"
+	[disabled]="isDisabled">
 	{{ text }}
 </button>

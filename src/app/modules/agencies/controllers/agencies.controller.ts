@@ -1,40 +1,44 @@
 import { Injectable } from "@angular/core";
-import { of } from "rxjs";
-import { delay } from "rxjs/operators";
 import { AgenciesService } from "src/app/modules/agencies/services/agencies.service";
-import { LocalStorageProvider } from "../../../core/storage/local-storage.provider";
 import { Agency } from "../interfaces/agency-list-item.interface";
 import { AgenciesState } from "../services/agencies-state.service";
+import { AgenciesStorageController } from "./agencies-storage.controller";
 
 @Injectable()
-export class AgenciesController extends LocalStorageProvider {
+export class AgenciesController extends AgenciesStorageController {
 
 	constructor(
 		private agencyServices: AgenciesService,
 		private agenciesState: AgenciesState
 	) {
-		super('agenciesLocal');
+		super();
 	}
 	
-	getAll() {
-		const agenciesLS = JSON.parse(this.getValue<Agency[]>() || '[]');
-		!agenciesLS?.length ? this.getAgenciesFromService() : this.getAgenciesFromLS(agenciesLS);
+	/**
+	 * Get all agencies from LS, if not exists call services to get data from agencies.json
+	 */
+	async getAll() {
+		const agenciesLS = this.getAllFromLS();
+		if (!agenciesLS.length) {
+			const agenciesFile = await this.agencyServices.getAllFromDataFile().toPromise();
+			this.saveOnLS(agenciesFile);
+			this.agenciesState.setAgencies(agenciesFile);
+		} else {
+			this.agenciesState.setAgencies(agenciesLS);
+		}
+		
+		setTimeout(() => this.agenciesState.setLoading(false), 1000);
 	}
 
-	private getAgenciesFromLS(agenciesLS: any) {
-		const agenciesLS$ = of(agenciesLS).pipe(delay(1000));
-		agenciesLS$.subscribe(agencies => {
-			this.agenciesState.setAgencies(agencies);
-			this.agenciesState.setLoading(false);
-		});
-	}
 
-	private getAgenciesFromService() {
-		this.agencyServices.getAllFromDataFile().subscribe(agencies => {
-			this.agenciesState.setAgencies(agencies);
-			this.setValue<Agency[]>(JSON.stringify(agencies));
-			this.agenciesState.setLoading(false);
-		});
+	/**
+	 * Update agency with clone of all agencies and replace index in this clone array 
+	 * @param agency agency to update
+	 */
+	updateAgency(agency: Agency) {
+		const allAgencies = [...this.getAllFromLS()];
+		const indexToUpdate = allAgencies.findIndex(ag => ag.agencia === agency.agencia);
+		allAgencies[indexToUpdate] = agency;
+		this.saveOnLS(allAgencies);
 	}
-
 }

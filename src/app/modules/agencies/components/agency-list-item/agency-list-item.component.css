@@ -4,6 +4,10 @@
 	display: flex;
 	align-items: center;
 	border-bottom: 1px solid var(--clgray);
+	transition: background-color .2s linear;
+}
+.agency-list__item:hover {
+	background-color: var(--clgray);
 }
 
 .agency-list__item-img {

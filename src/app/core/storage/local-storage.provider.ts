@@ -1,16 +1,16 @@
-export class LocalStorageProvider {
+export class LocalStorageProvider<T> {
 	private itemLS: string;
 
 	constructor(item: string) {
 		this.itemLS = item;
 	}
 
-	setValue<T>(value: any) {
+	setValue(value: string) {
 		localStorage.setItem(this.itemLS, value);
 	}
 
-	getValue<T>() {
-		return localStorage.getItem(this.itemLS);
+	getValue(): T {
+		return JSON.parse(localStorage.getItem(this.itemLS) || '[]');
 	}
 	
 }
