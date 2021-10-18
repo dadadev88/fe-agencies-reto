@@ -1,4 +1,5 @@
 .agency-list__notfound {
 	color: var(--csecundary);
 	text-align: center;
+	margin-top: 25%
 }
