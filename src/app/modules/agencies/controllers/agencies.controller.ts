@@ -55,4 +55,9 @@ export class AgenciesController extends AgenciesStorageController {
 			a.direccion?.toLowerCase().includes(value)
 		));
 	}
+
+	public goToDetail(agency: Agency) {
+		this.state.setAgency(agency);
+		this.state.setFormMode(false);
+	}
 }

@@ -10,7 +10,7 @@ import { BCPHeaderOptions } from '../../interfaces/bcp-header.interface';
 export class BCPHeaderComponent {
 
 	@Input() options: BCPHeaderOptions[] = [];
-	@Input() isFormMode: boolean = true;
+	@Input() isHeaderFormMode: boolean = true;
 
 	constructor(private controller: AgenciesController) {}
 	

@@ -22,8 +22,7 @@ export class AgenciesListPageComponent implements OnInit {
 	}
 
 	goToDetail(agency: Agency) {
-		this.state.setAgency(agency);
-		this.state.setFormMode(false);
+		this.agenciesController.goToDetail(agency);
 		this.router.navigate(['/agencias/detalle']);
 	}
 
