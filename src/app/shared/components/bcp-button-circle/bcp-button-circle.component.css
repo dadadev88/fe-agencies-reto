@@ -5,8 +5,13 @@
 	padding: 1rem;
 	border-radius: 50%;
 	box-shadow: 3px 3px 1px 0px #b5b5b5;
+	font-size: 24px;
+	font-weight: bold;
+}
+.bcp-btn-circle:hover {
+	cursor: pointer;
 }
 
-.bcp-btn-circle .bcp-btn-primary {
-	background-color: var(--csecundary);
+.bcp-btn-circle.bcp-btn--secondary {
+	background-color: var(--csecondary);
 }

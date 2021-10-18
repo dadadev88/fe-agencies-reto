@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BcpButtonCircleComponent } from './bcp-button-circle.component';
+import { BCPButtonCircleComponent } from './bcp-button-circle.component';
 
-describe('BcpButtonCircleComponent', () => {
-  let component: BcpButtonCircleComponent;
-  let fixture: ComponentFixture<BcpButtonCircleComponent>;
+describe('BCPButtonCircleComponent', () => {
+  let component: BCPButtonCircleComponent;
+  let fixture: ComponentFixture<BCPButtonCircleComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BcpButtonCircleComponent ]
+      declarations: [ BCPButtonCircleComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BcpButtonCircleComponent);
+    fixture = TestBed.createComponent(BCPButtonCircleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

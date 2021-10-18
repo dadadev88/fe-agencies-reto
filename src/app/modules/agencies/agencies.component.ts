@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { BCPHeaderOptions } from '@shared/interfaces/bcp-header.interface';
 import { AgenciesState } from './services/agencies-state.service';
 
 @Component({
@@ -9,10 +8,6 @@ import { AgenciesState } from './services/agencies-state.service';
 })
 export class AgenciesComponent {
 
-	optionsHeader: Array<BCPHeaderOptions> = [
-		{ description: 'Agencias', toRoute: ['/agencias'] }
-	];
-
-	constructor(public state: AgenciesState) {}
+	constructor() {}
 
 }

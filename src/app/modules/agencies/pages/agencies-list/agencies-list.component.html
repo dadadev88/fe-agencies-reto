@@ -1,5 +1,6 @@
 <app-bcp-loading *ngIf="state.getLoading(); else agenciesContent"></app-bcp-loading>
 <ng-template #agenciesContent>
+	<app-bcp-header [title]="'Agencias'"></app-bcp-header>
 	<div class="agencies-list-container">
 		<section class="agency-list">
 			<app-agency-list-item *ngIf="state.getAgencies().length; else notFoundAgencies"
@@ -9,5 +10,8 @@
 				<h3 class="agency-list__notfound">No existen agencias según valor indicado</h3>
 			</ng-template>
 		</section>
+		<div class="agency-list__footer">
+			<app-bcp-button-circle (click)="goToDetail(null)" ></app-bcp-button-circle>
+		</div>
 	</div>
 </ng-template>

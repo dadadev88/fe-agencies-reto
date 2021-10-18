@@ -1,13 +1,9 @@
 <header class="bcp-header">
 	<nav class="bcp-header__nav">
-		<ul class="bcp-header__list">
-			<li *ngFor="let opt of options;"
-				[routerLink]="opt.toRoute"
-				class="bcp-header__list-item">
-				{{ opt.description }}
-			</li>
-		</ul>
-		<div class="bcp-header__form" *ngIf="isHeaderFormMode">
+		<div class="bcp-header__title">
+			{{ title }}
+		</div>
+		<div class="bcp-header__form" *ngIf="showInput">
 			<app-bcp-text
 				(keyupEmmiter)="keyupInputSearch($event)"
 				[hasFG]="false"

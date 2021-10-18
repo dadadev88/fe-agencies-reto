@@ -13,16 +13,16 @@ export class AgenciesListPageComponent implements OnInit {
 
 	constructor(
 		public state: AgenciesState,
-		public agenciesController: AgenciesController,
+		public controller: AgenciesController,
 		private router: Router
 	) {}
 
 	ngOnInit() {
-		this.agenciesController.getAll();
+		this.controller.getAll();
 	}
 
-	goToDetail(agency: Agency) {
-		this.agenciesController.goToDetail(agency);
+	goToDetail(agency: Agency | null) {
+		this.controller.goToDetail(agency);
 		this.router.navigate(['/agencias/detalle']);
 	}
 

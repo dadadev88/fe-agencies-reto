@@ -31,15 +31,15 @@ export class AgenciesController extends AgenciesStorageController {
 		return btoa(new Date().toISOString() + nameAgency );
 	}
 
+	createAgency(agency: Agency) {
+		this.saveOnLS([...this.getAllFromLS(), agency]);
+	}
 
 	updateAgency(agency: Agency) {
 		const allAgencies = [...this.getAllFromLS()];
-		const indexToUpdate = allAgencies.findIndex(ag => {
-			return ag.id === agency.id;
-		});
+		const indexToUpdate = allAgencies.findIndex(ag => ag.id === agency.id);
 		allAgencies[indexToUpdate] = agency;
 		this.saveOnLS(allAgencies);
-		this.state.setFormMode(true);
 	}
 
 	searchAgencies(value: string) {
@@ -56,8 +56,7 @@ export class AgenciesController extends AgenciesStorageController {
 		));
 	}
 
-	public goToDetail(agency: Agency) {
+	public goToDetail(agency: Agency | null) {
 		this.state.setAgency(agency);
-		this.state.setFormMode(false);
 	}
 }

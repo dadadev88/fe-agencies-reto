@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { AgenciesController } from 'src/app/modules/agencies/controllers/agencies.controller';
-import { BCPHeaderOptions } from '../../interfaces/bcp-header.interface';
 
 @Component({
 	selector: 'app-bcp-header',
@@ -9,8 +8,8 @@ import { BCPHeaderOptions } from '../../interfaces/bcp-header.interface';
 })
 export class BCPHeaderComponent {
 
-	@Input() options: BCPHeaderOptions[] = [];
-	@Input() isHeaderFormMode: boolean = true;
+	@Input() title!: string;
+	@Input() showInput: boolean = true;
 
 	constructor(private controller: AgenciesController) {}
 	
