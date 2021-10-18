@@ -1,6 +1,6 @@
 <app-bcp-loading *ngIf="state.getLoading(); else agenciesContent"></app-bcp-loading>
 <ng-template #agenciesContent>
-	<div class="agencies-list-container">
+	<div [ngClass]="['agencies-list-container', !state.getAgencies().length ? 'bcp-container-jcenter' : '']">
 		<section class="agency-list">
 			<app-agency-list-item *ngIf="state.getAgencies().length; else notFoundAgencies"
 				[agencies]="state.getAgencies()"

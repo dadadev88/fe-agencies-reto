@@ -27,7 +27,9 @@ div.bcp-ftext.bcp-ftext--womb input.bcp-ftext__input {
 }
 div.bcp-ftext.bcp-ftext--womb input.bcp-ftext__input {
 	background-color: transparent;
+	color: #fff;
 }
 div.bcp-ftext.bcp-ftext--womb input.bcp-ftext__input:focus {
 	background-color: #fff;
+	color: initial;
 }
