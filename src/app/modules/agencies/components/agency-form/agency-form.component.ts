@@ -11,7 +11,8 @@ import { Agency } from '../../interfaces/agency-list-item.interface';
 })
 export class AgencyFormComponent implements OnInit {
 
-	@Input() agency?: Agency | null = null;
+	@Input() agency: Agency | {} = {};
+	isNewAgency: boolean = true;
 
 	formAgency: FormGroup = new FormBuilder().group({});
 
@@ -30,15 +31,17 @@ export class AgencyFormComponent implements OnInit {
 	}
 	
 	ngOnInit(): void {
-		if (this.agency) {
-			this.formAgency.patchValue(this.agency)
+		const agencyEmpty: boolean = Object.keys(this.agency as {}).length > 0;
+		if ( agencyEmpty ) {
+			this.isNewAgency = false;
+			this.formAgency.patchValue(this.agency);
 		}
 	}
 
 	onSubmit() {
-		if (this.formAgency.valid) {
-			this.controller.updateAgency({...this.agency, ...this.formAgency.value});
-			this.router.navigate(['/agencias', 'listado']);
-		}
+		this.isNewAgency 
+			? this.controller.createAgency(this.formAgency.value)
+			: this.controller.updateAgency({...this.agency, ...this.formAgency.value});
+		this.router.navigate(['/agencias', 'listado']);
 	}
 }

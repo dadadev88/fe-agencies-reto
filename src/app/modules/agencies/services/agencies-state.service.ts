@@ -6,7 +6,7 @@ export class AgenciesState {
 
 	private isLoading: boolean = true;
 	private agencies: Agency[] = [];
-	private agency: Agency | null = null;
+	private agency: Agency | {} = {};
 
 	setLoading(value: boolean) {
 		this.isLoading = value;
@@ -28,7 +28,7 @@ export class AgenciesState {
 		return this.agency;
 	}
 
-	setAgency(agency: Agency | null) {
+	setAgency(agency: Agency | {}) {
 		this.agency = agency;
 	}
 

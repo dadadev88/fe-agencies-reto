@@ -7,7 +7,10 @@
 		<app-bcp-text name="lat" label="Latitud"></app-bcp-text>
 		<app-bcp-text name="lon" label="Longitud"></app-bcp-text>
 		<div class="agency-form__footer">
-			<app-bcp-button [isDisabled]="formAgency.invalid" text="Actualizar"></app-bcp-button>
+			<app-bcp-button
+				[isDisabled]="formAgency.invalid"
+				[text]="isNewAgency ? 'Guardar' : 'Actualizar'">
+			</app-bcp-button>
 		</div>
 	</form>
 </div>

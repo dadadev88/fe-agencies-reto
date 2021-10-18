@@ -21,7 +21,7 @@ export class AgenciesListPageComponent implements OnInit {
 		this.controller.getAll();
 	}
 
-	goToDetail(agency: Agency | null) {
+	goToDetail(agency: Agency | {}) {
 		this.controller.goToDetail(agency);
 		this.router.navigate(['/agencias/detalle']);
 	}

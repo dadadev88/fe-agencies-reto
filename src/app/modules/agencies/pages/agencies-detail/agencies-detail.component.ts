@@ -14,10 +14,6 @@ export class AgenciesDetailPageComponent implements OnInit {
 		private router: Router
 	) {}
 
-	ngOnInit() {
-		if (!this.state.getAgency()) {
-			this.router.navigate(['/agencias/listado']);
-		}
-	}
+	ngOnInit() {}
 	
  }

@@ -27,25 +27,29 @@ export class AgenciesController extends AgenciesStorageController {
 		setTimeout(() => this.state.setLoading(false), 500);
 	}
 
-	private generateId(nameAgency: string) {
-		return btoa(new Date().toISOString() + nameAgency );
-	}
-
 	createAgency(agency: Agency) {
-		this.saveOnLS([...this.getAllFromLS(), agency]);
+		const newAgencies = [...this.getAllFromLS()];
+		newAgencies.push({...agency, id: this.generateId(agency.agencia)})
+		this.saveOnLS(newAgencies);
 	}
 
 	updateAgency(agency: Agency) {
 		const allAgencies = [...this.getAllFromLS()];
-		const indexToUpdate = allAgencies.findIndex(ag => ag.id === agency.id);
-		allAgencies[indexToUpdate] = agency;
-		this.saveOnLS(allAgencies);
+		// const indexToUpdate = allAgencies.findIndex(ag => ag.id === agency.id);
+		// allAgencies[indexToUpdate] = agency;
+		// this.saveOnLS(allAgencies);
+		const others = allAgencies.filter(ag => ag.id !== agency.id);
+		this.saveOnLS([...others, agency]);
 	}
 
 	searchAgencies(value: string) {
 		const allAgencies = [...this.getAllFromLS()];
 		let newAgencies: Agency[] = value.trim() !== '' ? this.filterAgencies(allAgencies, value.toLowerCase()) : allAgencies;
 		this.state.setAgencies(newAgencies);
+	}
+
+	goToDetail(agency: Agency | {}) {
+		this.state.setAgency(agency);
 	}
 	
 	private filterAgencies(agencies: Agency[], value: string) {
@@ -56,7 +60,8 @@ export class AgenciesController extends AgenciesStorageController {
 		));
 	}
 
-	public goToDetail(agency: Agency | null) {
-		this.state.setAgency(agency);
+	private generateId(nameAgency: string) {
+		return btoa(new Date().toISOString() + nameAgency );
 	}
+	
 }
