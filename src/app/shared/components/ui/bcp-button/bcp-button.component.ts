@@ -9,7 +9,7 @@ export class BCPButtonComponent {
 
 	@Input() text: string = 'Botón';
 	@Input() isSubmit?: boolean = true;
-	@Input() style: 'primary' | 'secondary' = 'primary';
+	@Input() color: 'primary' | 'secondary' = 'primary';
 	@Input() isDisabled: boolean = false;
 
 	constructor() { }
