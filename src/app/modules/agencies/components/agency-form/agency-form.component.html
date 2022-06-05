@@ -1,4 +1,3 @@
-
 <div class="agency-form">
 	<form [formGroup]="formAgency" (ngSubmit)="onSubmit()">
 		<app-bcp-text name="agencia" label="Nombre de agencia"></app-bcp-text>
@@ -10,6 +9,11 @@
 			<app-bcp-button
 				[isDisabled]="formAgency.invalid"
 				[text]="isNewAgency ? 'Guardar' : 'Actualizar'">
+			</app-bcp-button>
+			<app-bcp-button
+				color="secondary"
+				(click)="goToAgenciesList()"
+				text="Cancelar">
 			</app-bcp-button>
 		</div>
 	</form>

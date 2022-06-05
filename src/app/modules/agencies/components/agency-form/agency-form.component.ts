@@ -1,6 +1,8 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ROUTES_AGENCIES } from 'src/app/core/constants/routes.constants';
 import { AgenciesController } from '../../controllers/agencies.controller';
 import { Agency } from '../../interfaces/agency-list-item.interface';
 
@@ -29,7 +31,7 @@ export class AgencyFormComponent implements OnInit {
 			lon: ['', [Validators.required]]
 		});
 	}
-	
+
 	ngOnInit(): void {
 		const agencyEmpty: boolean = Object.keys(this.agency as {}).length > 0;
 		if ( agencyEmpty ) {
@@ -39,9 +41,13 @@ export class AgencyFormComponent implements OnInit {
 	}
 
 	onSubmit() {
-		this.isNewAgency 
+		this.isNewAgency
 			? this.controller.createAgency(this.formAgency.value)
 			: this.controller.updateAgency({...this.agency, ...this.formAgency.value});
-		this.router.navigate(['/agencias', 'listado']);
+		this.router.navigate([ROUTES_AGENCIES.list]);
 	}
+
+  goToAgenciesList() {
+    this.router.navigate([ROUTES_AGENCIES.list]);
+  }
 }
