@@ -46,3 +46,6 @@ Thumbs.db
 
 docs/
 .vscode/
+
+# Sonar
+**/sonar-project-local.properties
