@@ -49,3 +49,4 @@ docs/
 
 # Sonar
 **/sonar-project-local.properties
+.scannerwork
