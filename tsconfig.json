@@ -23,6 +23,7 @@
     "paths": {
       "@shared/*": ["src/app/shared/*"],
       "@cforms/*": ["src/app/shared/components/forms/*"],
+      "@constants/*": ["src/app/core/constants/*"]
     }
   },
   "angularCompilerOptions": {

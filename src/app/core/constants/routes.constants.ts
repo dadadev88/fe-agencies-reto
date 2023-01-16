@@ -1,4 +1,4 @@
-export const ROUTES_AGENCIES = {
-  list: '/agencias/listado',
-  detail: '/agencias/detalle'
+export enum RoutesAgenciesApp {
+  list = '/agencias/listado',
+  detail = '/agencias/detalle'
 };

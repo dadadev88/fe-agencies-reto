@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { AgenciesState } from './services/agencies-state.service';
+import { LoaderService } from '@shared/services/loader.service';
 
 @Component({
-	selector: 'app-agencies',
-	templateUrl: './agencies.component.html',
-	styleUrls: ['./agencies.component.css']
+  selector: 'agencies',
+  templateUrl: './agencies.component.html',
+  styleUrls: ['./agencies.component.css']
 })
 export class AgenciesComponent {
 
-	constructor() {}
-
+  constructor(public loader: LoaderService) { }
 }

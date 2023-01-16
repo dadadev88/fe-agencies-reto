@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "bcp-frontend-challenge": {
+    "fe-agencies-reto": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -15,12 +15,12 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "bcp",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/bcp-frontend-challenge",
+            "outputPath": "dist/fe-agencies-reto",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -71,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "bcp-frontend-challenge:build:production"
+              "browserTarget": "fe-agencies-reto:build:production"
             },
             "development": {
-              "browserTarget": "bcp-frontend-challenge:build:development"
+              "browserTarget": "fe-agencies-reto:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "bcp-frontend-challenge:build"
+            "browserTarget": "fe-agencies-reto:build"
           }
         },
         "test": {
@@ -105,5 +105,5 @@
       }
     }
   },
-  "defaultProject": "bcp-frontend-challenge"
+  "defaultProject": "fe-agencies-reto"
 }

@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ControlContainer, FormGroupDirective } from '@angular/forms';
 
 @Component({
-	selector: 'app-bcp-text',
+	selector: 'bcp-text',
 	templateUrl: './bcp-text.component.html',
 	styleUrls: ['./bcp-text.component.css'],
 	viewProviders: [

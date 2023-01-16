@@ -1,53 +1,66 @@
-import { ThrowStmt } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ROUTES_AGENCIES } from 'src/app/core/constants/routes.constants';
+import { LoaderService } from '@shared/services/loader.service';
+import { RoutesAgenciesApp } from 'src/app/core/constants/routes.constants';
 import { AgenciesController } from '../../controllers/agencies.controller';
 import { Agency } from '../../interfaces/agency-list-item.interface';
 
 @Component({
-	selector: 'app-agency-form',
-	templateUrl: './agency-form.component.html',
-	styleUrls: ['./agency-form.component.css']
+  selector: 'agency-form',
+  templateUrl: './agency-form.component.html',
+  styleUrls: ['./agency-form.component.css']
 })
 export class AgencyFormComponent implements OnInit {
 
-	@Input() agency: Agency | {} = {};
-	isNewAgency: boolean = true;
+  @Input()
+  agency: Agency | null = null;
+  isNewAgency: boolean = true;
 
-	formAgency: FormGroup = new FormBuilder().group({});
+  formAgency: FormGroup = new FormBuilder().group({});
 
-	constructor(
-		private formBuilder: FormBuilder,
-		private controller: AgenciesController,
-		private router: Router
-	) {
-		this.formAgency = this.formBuilder.group({
-			agencia: ['', [Validators.required]],
-			direccion: ['', [Validators.required]],
-			distrito: ['', [Validators.required]],
-			lat: ['', [Validators.required]],
-			lon: ['', [Validators.required]]
-		});
-	}
+  constructor(
+    private formBuilder: FormBuilder,
+    private controller: AgenciesController,
+    private router: Router,
+    private loader: LoaderService
+  ) {
+    this.formAgency = this.formBuilder.group({
+      agencia: ['', [Validators.required]],
+      direccion: ['', [Validators.required]],
+      distrito: ['', [Validators.required]],
+      lat: ['', [Validators.required]],
+      lon: ['', [Validators.required]]
+    });
+  }
 
-	ngOnInit(): void {
-		const agencyEmpty: boolean = Object.keys(this.agency as {}).length > 0;
-		if ( agencyEmpty ) {
-			this.isNewAgency = false;
-			this.formAgency.patchValue(this.agency);
-		}
-	}
+  ngOnInit(): void {
+    const currentAgencyLS = localStorage.getItem('currentAgency');
+    if (!currentAgencyLS && !this.agency) {
+      this.router.navigate([RoutesAgenciesApp.list]);
+      return;
+    }
 
-	onSubmit() {
-		this.isNewAgency
-			? this.controller.createAgency(this.formAgency.value)
-			: this.controller.updateAgency({...this.agency, ...this.formAgency.value});
-		this.router.navigate([ROUTES_AGENCIES.list]);
-	}
+    if (this.agency || currentAgencyLS)
+      this.isNewAgency = false;
+
+    if (currentAgencyLS && !this.agency)
+      this.agency = JSON.parse(currentAgencyLS);
+
+    localStorage.setItem('currentAgency', JSON.stringify(this.agency));
+
+    this.formAgency.patchValue(this.agency || {});
+  }
+
+  onSubmit() {
+    this.loader.open();
+    this.isNewAgency
+      ? this.controller.createAgency(this.formAgency.value)
+      : this.controller.updateAgency({ ...this.agency, ...this.formAgency.value });
+    this.router.navigate([RoutesAgenciesApp.list]);
+  }
 
   goToAgenciesList() {
-    this.router.navigate([ROUTES_AGENCIES.list]);
+    this.router.navigate([RoutesAgenciesApp.list]);
   }
 }

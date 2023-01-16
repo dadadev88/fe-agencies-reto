@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { LoaderService } from '@shared/services/loader.service';
 
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+  selector: 'root',
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
-	title = 'bcp-frontend-challenge';
+
+  constructor(public loader: LoaderService) { }
 }

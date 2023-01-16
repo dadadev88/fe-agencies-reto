@@ -1,14 +1,15 @@
 <header class="bcp-header">
-	<nav class="bcp-header__nav">
-		<div class="bcp-header__title">
-			{{ title }}
-		</div>
-		<div class="bcp-header__form" *ngIf="showInput">
-			<app-bcp-text
-				(keyupEmmiter)="keyupInputSearch($event)"
-				[hasFG]="false"
-				[addBM]="false"
-				placeholder="Buscar agencia"></app-bcp-text>
-		</div>
-	</nav>
+  <nav class="bcp-header__nav">
+    <div class="bcp-header__title">
+      {{ title }}
+    </div>
+    <div class="bcp-header__form" *ngIf="showInput">
+      <bcp-text
+        (keyupEmmiter)="keyupInputSearch($event)"
+        [hasFG]="false"
+        [addBM]="false"
+        placeholder="Buscar agencia"
+      ></bcp-text>
+    </div>
+  </nav>
 </header>
