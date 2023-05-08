@@ -1,7 +1,13 @@
 pipeline {
     agent any
 
-    tools {nodejs "NodeJS_14"}
+    environment {
+      IS_JENKINS = 'true'
+    }
+
+    tools {
+      nodejs "NodeJS_16"
+    }
 
     stages {
         stage('Pre Build') {

@@ -1,3 +1,9 @@
+if (process.env.IS_JENKINS) {
+  const chromePath = require('puppeteer').executablePath();
+  console.log('>>> Executing fron Jenkins');
+  console.log(`${chromePath}`);
+  process.env.CHROME_BIN = chromePath;
+}
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
