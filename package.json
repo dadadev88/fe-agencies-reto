@@ -9,7 +9,7 @@
     "test": "ng test --watch false --browsers ChromeHeadless --code-coverage true",
     "test:watch": "ng test --watch true --browsers ChromeHeadless",
     "test:watch:chrome": "ng test --watch true",
-    "sonar:local": "sonar-scanner -Dproject.settingss=devops/sonar/sonar-project-local.properties",
+    "sonar:local": "sonar-scanner -Dproject.settings=devops/sonar/sonar-project-local.properties",
     "test:sonar:local": "npm run test && sonar-scanner -Dproject.settings=devops/sonar/sonar-project-local.properties"
   },
   "private": true,
