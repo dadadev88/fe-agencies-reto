@@ -1,9 +1,10 @@
-if (process.env.IS_JENKINS) {
-  const chromePath = require('puppeteer').executablePath();
-  console.log('>>> Executing fron Jenkins');
-  console.log(`${chromePath}`);
-  process.env.CHROME_BIN = chromePath;
-}
+const IS_JENKINS_ENV = process.env.IS_JENKINS;
+console.log('\nIs Jenkins?', IS_JENKINS_ENV);
+process.env.CHROME_BIN = require('puppeteer').executablePath();
+
+console.log('\nCHROME_BIN?', process.env.CHROME_BIN);
+
+
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
@@ -44,7 +45,15 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: [ 'ChromeHeadless' ],
+    customLaunchers:{
+      HeadlessChrome:{
+        base: 'ChromeHeadless',
+        flags: [
+          '--no-sandbox'
+        ]
+      }
+    },
     singleRun: false,
     restartOnFileChange: true
   });

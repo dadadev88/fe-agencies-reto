@@ -47,6 +47,8 @@ Thumbs.db
 docs/
 .vscode/
 
+.angular
+
 # Sonar
 **/sonar-project-local.properties
 .scannerwork
