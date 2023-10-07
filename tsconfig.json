@@ -14,17 +14,24 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2020",
+    "target": "ES2022",
     "module": "es2020",
     "lib": [
       "es2018",
       "dom"
     ],
     "paths": {
-      "@shared/*": ["src/app/shared/*"],
-      "@cforms/*": ["src/app/shared/components/forms/*"],
-      "@constants/*": ["src/app/core/constants/*"]
-    }
+      "@shared/*": [
+        "src/app/shared/*"
+      ],
+      "@cforms/*": [
+        "src/app/shared/components/forms/*"
+      ],
+      "@constants/*": [
+        "src/app/core/constants/*"
+      ]
+    },
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
