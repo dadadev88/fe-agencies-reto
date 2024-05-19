@@ -1,10 +1,10 @@
 :root {
-  --cprimary: #012d74;
+  --cprimary: #002A8D;
+  --cprimary-100: #012d741a;
   --csecondary: #ff7800;
   --cgray: #a6a6a6;
   --clgray: #f0f0f0;
-  --cfmprimary: #2196f3;
-  --hover-secondary: #ff78001c;
+  --ctext: rgb(99, 99, 99);
 }
 
 * {
