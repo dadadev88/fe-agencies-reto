@@ -19,7 +19,7 @@ describe('@AgenciesFilterPipe', () => {
     expect(controllerSpy.filterAgencies).toHaveBeenCalledWith(agencies, value);
   });
 
-  it("should not filter agencies when don't have value to find", () => {
+  it("should not filter agencies when dont have value to find", () => {
     const agencies = [] as Agency[];
     const value = '';
 
