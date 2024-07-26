@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoaderService } from '@shared/services/loader.service';
 import { RoutesAgenciesApp } from 'src/app/core/constants/routes.constants';
@@ -17,10 +17,10 @@ export class AgencyFormComponent implements OnInit {
   agency: Agency | null = null;
   isNewAgency: boolean = true;
 
-  formAgency: FormGroup = new FormBuilder().group({});
+  formAgency: UntypedFormGroup = new UntypedFormBuilder().group({});
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private controller: AgenciesController,
     private router: Router,
     private loader: LoaderService
