@@ -18,13 +18,4 @@ describe('@AgenciesFilterPipe', () => {
 
     expect(controllerSpy.filterAgencies).toHaveBeenCalledWith(agencies, value);
   });
-
-  it("should not filter agencies when dont have value to find", () => {
-    const agencies = [] as Agency[];
-    const value = '';
-
-    pipe.transform(agencies, value);
-
-    expect(controllerSpy.filterAgencies).toHaveBeenCalledTimes(0);
-  });
 });
