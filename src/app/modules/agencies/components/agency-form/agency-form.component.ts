@@ -53,7 +53,7 @@ export class AgencyFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.loader.open();
+    this.loader.show();
     this.isNewAgency
       ? this.controller.createAgency(this.formAgency.value)
       : this.controller.updateAgency({ ...this.agency, ...this.formAgency.value });

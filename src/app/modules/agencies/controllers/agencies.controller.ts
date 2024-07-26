@@ -6,7 +6,6 @@ import { Agency } from "../interfaces/agency-list-item.interface";
 import { RoutesAgenciesApp } from "@constants/routes.constants";
 import AgenciesState from "../services/agencies-state.service";
 import AgenciesStorageController from "./agencies-storage.controller";
-import { DynamicComponentService } from "@shared/services/dynamic-component.service";
 
 @Injectable()
 export class AgenciesController extends AgenciesStorageController {
@@ -15,7 +14,7 @@ export class AgenciesController extends AgenciesStorageController {
     private agencyServices: AgenciesService,
     private state: AgenciesState,
     private router: Router,
-    private loader: DynamicComponentService
+    private loader: LoaderService
   ) {
     super();
   }
@@ -38,9 +37,11 @@ export class AgenciesController extends AgenciesStorageController {
   }
 
   goToDetail(agency: Agency = {} as Agency) {
-    this.loader.show('LO_GOOGLE')
+    this.loader.show('LO_001')
     this.setCurrentAgency(agency);
-    this.router.navigate([RoutesAgenciesApp.detail]);
+    setTimeout(() => {
+      this.router.navigate([RoutesAgenciesApp.detail]);
+    }, 1200);
   }
 
   private getAgencies() {

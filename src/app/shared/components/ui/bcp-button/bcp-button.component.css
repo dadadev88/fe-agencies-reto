@@ -13,7 +13,7 @@
 	opacity: 0.9;
 }
 .bcp-button.bcp-button--primary {
-	background-color: var(--cfmprimary);
+	background-color: var(--cprimary);
 	color: #fff;
 }
 .bcp-button.bcp-button--secondary {
