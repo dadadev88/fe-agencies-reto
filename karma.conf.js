@@ -1,3 +1,8 @@
+const IS_JENKINS_ENV = process.env.IS_JENKINS;
+
+if (IS_JENKINS_ENV) {
+  process.env.CHROME_BIN = require('puppeteer').executablePath();
+}
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
@@ -25,11 +30,12 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/bcp-frontend-challenge'),
+      dir: require('path').join(__dirname, './coverage/fe-agencies-reto'),
       subdir: '.',
       reporters: [
         { type: 'html' },
-        { type: 'text-summary' }
+        { type: 'text-summary' },
+        { type: 'lcov' },
       ]
     },
     reporters: ['progress', 'kjhtml'],
@@ -37,7 +43,15 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: [
+      'ChromeNoSandbox'
+    ],
+    customLaunchers: {
+      ChromeNoSandbox: {
+        base: 'ChromeHeadless',
+        flags: IS_JENKINS_ENV ? ['--no-sandbox'] : []
+      }
+    },
     singleRun: false,
     restartOnFileChange: true
   });

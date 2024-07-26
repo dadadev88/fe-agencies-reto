@@ -1,0 +1,6 @@
+<button
+	[type]="isSubmit ? 'submit' : 'button'"
+	[ngClass]="['bcp-button', 'bcp-button--' + color]"
+	[disabled]="isDisabled">
+	{{ text }}
+</button>

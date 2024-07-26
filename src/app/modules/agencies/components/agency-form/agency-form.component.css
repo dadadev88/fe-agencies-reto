@@ -1,7 +1,27 @@
 .agency-form {
-	padding: 1rem .5rem;
+  padding: 1rem .5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.agency-form__img img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+  margin-bottom: 20px;
+}
+
+.agency-form__img--empty img {
+  border-radius: 5px;
+}
+
+form.agency-form__form {
+  width: 80%;
 }
 
 .agency-form__footer {
-	text-align: center;
+  text-align: center;
 }

@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AgenciesState } from '../../services/agencies-state.service';
+import { AgenciesController } from '../../controllers/agencies.controller';
 
 @Component({
-	selector: 'app-agencies-detail-page',
-	templateUrl: './agencies-detail.component.html',
-	styleUrls: ['./agencies-detail.component.css']
+  selector: 'agencies-detail-page',
+  templateUrl: './agencies-detail.component.html'
 })
 export class AgenciesDetailPageComponent implements OnInit {
 
-	constructor(
-		public state: AgenciesState,
-		private router: Router
-	) {}
+  constructor(
+    public controller: AgenciesController
+  ) { }
 
-	ngOnInit() {}
-	
- }
+  ngOnInit(): void {
+    this.controller.onInitDetail();
+  }
+
+}

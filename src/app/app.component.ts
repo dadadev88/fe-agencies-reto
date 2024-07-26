@@ -1,10 +1,18 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, ViewContainerRef } from '@angular/core';
+import { DynamicComponentService } from '@shared/services/dynamic-component.service';
 
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+  selector: 'root',
+  templateUrl: './app.component.html'
 })
-export class AppComponent {
-	title = 'bcp-frontend-challenge';
+export class AppComponent implements AfterViewInit {
+
+  constructor(
+    private dynamicService: DynamicComponentService,
+    private vcr: ViewContainerRef
+  ) { }
+
+  ngAfterViewInit(): void {
+    this.dynamicService.setContainer(this.vcr);
+  }
 }

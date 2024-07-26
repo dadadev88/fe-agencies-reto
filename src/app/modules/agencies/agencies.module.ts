@@ -13,9 +13,10 @@ import { AgenciesDetailPageComponent } from './pages/agencies-detail/agencies-de
 import { AgenciesListPageComponent } from './pages/agencies-list/agencies-list.component';
 // Providers
 import { AgenciesService } from './services/agencies.service';
-import { AgenciesState } from './services/agencies-state.service';
+import AgenciesState from './services/agencies-state.service';
 import { AgenciesController } from './controllers/agencies.controller';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AgenciesFilterPipe } from './pipes/agencies-filter.pipe';
 
 const agenciesPagesComponents = [
 	AgenciesDetailPageComponent,
@@ -28,7 +29,7 @@ const agenciesComponents = [
 ];
 
 @NgModule({
-	declarations: [ AgenciesComponent, ...agenciesComponents, ...agenciesPagesComponents ],
+	declarations: [AgenciesComponent, ...agenciesComponents, ...agenciesPagesComponents, AgenciesFilterPipe],
 	imports: [
 		CommonModule,
 		AgenciesRoutingModule,

@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+
+    environment {
+      IS_JENKINS = 'true'
+    }
+
+    tools {
+      nodejs 'NodeJS_16'
+    }
+
+    stages {
+      stage('Pre Build') {
+        steps {
+          echo '++++++++++++ Preparing build ++++++++++++'
+          echo '>>> Using NodeJS version:'
+          sh 'node -v'
+          echo '>>> Using NPM version:'
+          sh 'npm -v'
+          echo '>>> Installing packages:'
+          sh 'npm i'
+        }
+      }
+      stage('QA') {
+        steps {
+          echo '++++++++++++ Executing quality code scanner ++++++++++++'
+          sh 'npm run test'
+        }
+      }
+    }
+}

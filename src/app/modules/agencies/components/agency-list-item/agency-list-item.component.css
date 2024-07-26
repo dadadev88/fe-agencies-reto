@@ -1,35 +1,43 @@
 .agency-list__item {
-	position: relative;
-	padding: .5rem;
-	display: flex;
-	align-items: center;
-	border-bottom: 1px solid var(--clgray);
-	transition: background-color .2s linear;
+  position: relative;
+  padding: .5rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--clgray);
+  transition: background-color .2s linear;
+  cursor: pointer;
+  transition: transform .5s ease;
 }
+
 .agency-list__item:hover {
-	background-color: var(--clgray);
+  background-color: var(--cprimary-100, lightgray);
+  transform: translateX(10px);
+}
+
+img[class*=agency-list__item] {
+  height: 50px;
+  width: 50px;
 }
 
 .agency-list__item-img {
-	height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
 }
 
 .agency-list__item-info {
-	padding-left: 1rem;
+  padding-left: 1rem;
 }
 
-.agency-list__item-info > p {
-	margin-bottom: .1rem;
+.agency-list__item-info>p {
+  margin-bottom: .1rem;
 }
 
-.agency-list__item-info > :nth-child(1) {
-	font-weight: bold;
+.agency-list__item-info> :nth-child(1) {
+  font-weight: bold;
 }
 
-.agency-list__item-info > :nth-child(3) {
-	font-size: 12px;
-}
-.agency-list__item-info > :nth-child(3) {
-	font-size: 12px;
-	color: var(--cgray);
+.agency-list__item-info> :nth-child(3) {
+  font-size: 12px;
+  color: var(--cgray);
 }

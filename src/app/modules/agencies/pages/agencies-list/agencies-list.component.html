@@ -1,17 +1,18 @@
-<app-bcp-loading *ngIf="state.getLoading(); else agenciesContent"></app-bcp-loading>
-<ng-template #agenciesContent>
-	<app-bcp-header [title]="'Agencias'"></app-bcp-header>
-	<div class="agencies-list-container">
-		<section class="agency-list">
-			<app-agency-list-item *ngIf="state.getAgencies().length; else notFoundAgencies"
-				[agencies]="state.getAgencies()"
-				(toDetail)="goToDetail($event)"></app-agency-list-item>
-			<ng-template #notFoundAgencies>
-				<h3 class="agency-list__notfound">No existen agencias según valor indicado</h3>
-			</ng-template>
-		</section>
-		<div class="agency-list__footer">
-			<app-bcp-button-circle (click)="goToDetail({})" ></app-bcp-button-circle>
-		</div>
-	</div>
-</ng-template>
+<bcp-header [title]="'Agencias'"></bcp-header>
+<div class="agencies-list-container">
+  <section class="agency-list">
+    <agencies-list
+      *ngIf="controller.agencies.length; else notFoundAgencies"
+      [agencies]="controller.agencies"
+      (toDetail)="controller.goToDetail($event)"
+    ></agencies-list>
+    <ng-template #notFoundAgencies>
+      <h3 class="agencies-list__notfound">
+        No existen agencias según valor indicado
+      </h3>
+    </ng-template>
+  </section>
+  <div class="agencies-list__footer">
+    <bcp-button-circle (click)="controller.goToDetail()"></bcp-button-circle>
+  </div>
+</div>

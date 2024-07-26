@@ -1,14 +1,13 @@
-.agency-list__notfound {
-	color: var(--csecondary);
-	text-align: center;
-	margin-top: 25%
+.agencies-list__notfound {
+  color: var(--csecondary);
+  text-align: center;
+  margin-top: 25%
 }
 
-.agency-list__footer {
-	padding: .5rem;
-	width: 100%;
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	text-align: right;
+.agencies-list__footer {
+  padding: .5rem;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  display: inline-block;
 }

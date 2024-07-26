@@ -6,7 +6,8 @@
 		"departamento": "Lima",
 		"direccion": "Las Flores de Primavera 1487",
 		"lat": -77.01232817,
-		"lon": -12.0046896
+		"lon": -12.0046896,
+    "img": "https://f.rpp-noticias.io/2018/02/07/cisneros-562035mp3_562036.png"
 	},
 	{
 		"agencia": "Punchana",
@@ -24,7 +25,8 @@
 		"departamento": "Lima",
 		"direccion": "Av. Conquistadores 968",
 		"lat": -77.03735314,
-		"lon": -12.10568371
+		"lon": -12.10568371,
+    "img": "https://malldelsur.pe/cache/wp-content/uploads/2016/09/X5A8404-700x500.jpg"
 	},
 	{
 		"agencia": "Salvador Allende",
@@ -33,7 +35,8 @@
 		"departamento": "Lima",
 		"direccion": "Av. Salvador Allende 468 – Villa María del Triunfo",
 		"lat": -76.957646,
-		"lon": -12.158153
+		"lon": -12.158153,
+    "img": "http://yamaue.com.pe/1001/dist/evento/serv_5894f58a4ee91.jpg"
 	},
 	{
 		"agencia": "Siglo XX (030)",
@@ -42,7 +45,8 @@
 		"departamento": "Arequipa",
 		"direccion": "Av. Siglo XX N°122 Cercado de Arequipa",
 		"lat": -71.530671,
-		"lon": -16.399615
+		"lon": -16.399615,
+    "img": "https://sigral.com.pe/timthumb.php?src=https://sigral.com.pe/wp-content/uploads/2447-1-4-600x400.jpg&w=570&h=340&zc=1&q=100"
 	},
 	{
 		"agencia": "Constructores",
@@ -51,7 +55,8 @@
 		"departamento": "Lima",
 		"direccion": "Av Constructores Cuadra 1 Mz. D Lote 5",
 		"lat": -76.957802,
-		"lon": -12.067233
+		"lon": -12.067233,
+    "img": "https://malldelsur.pe/cache/wp-content/uploads/2016/09/X5A8409-700x500.jpg"
 	},
 	{
 		"agencia": "Victor Larco",
@@ -69,7 +74,8 @@
 		"departamento": "Arequipa",
 		"direccion": "Av. San Martín de Socabaya N° 307 Socabaya",
 		"lat": -71.529979,
-		"lon": -16.438285
+		"lon": -16.438285,
+    "img": "https://sigral.com.pe/timthumb.php?src=https://sigral.com.pe/wp-content/uploads/2447-1-2-600x400.jpg&w=570&h=340&zc=1&q=100"
 	},
 	{
 		"agencia": "Colonial",
@@ -105,7 +111,8 @@
 		"departamento": "Lima",
 		"direccion": "Av. La Molina N. 161",
 		"lat": -76.963932,
-		"lon": -12.055857
+		"lon": -12.055857,
+    "img": "https://fastly.4sqi.net/img/general/600x600/43303948_2BQAo-RYJ4sh3GFQgVyAQ2Gfhs29uLIdKYPwEilCITU.jpg"
 	},
 	{
 		"agencia": "Real Plaza Salaverry",

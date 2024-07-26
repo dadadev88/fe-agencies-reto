@@ -1,16 +1,16 @@
 export class LocalStorageProvider<T> {
-	private itemLS: string;
+  private key: string;
 
-	constructor(item: string) {
-		this.itemLS = item;
-	}
+  constructor(key: string) {
+    this.key = key;
+  }
 
-	setValue(value: string) {
-		localStorage.setItem(this.itemLS, value);
-	}
+  setValue(value: string) {
+    localStorage.setItem(this.key, value);
+  }
 
-	getValue(): T {
-		return JSON.parse(localStorage.getItem(this.itemLS) || '[]');
-	}
-	
+  getValue(): T {
+    return JSON.parse(localStorage.getItem(this.key) || '[]');
+  }
+
 }

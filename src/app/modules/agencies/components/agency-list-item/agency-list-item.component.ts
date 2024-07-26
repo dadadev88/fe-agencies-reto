@@ -1,23 +1,42 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { Agency } from '../../interfaces/agency-list-item.interface';
+import AgenciesState from '../../services/agencies-state.service';
 
 @Component({
-	selector: 'app-agency-list-item',
-	templateUrl: './agency-list-item.component.html',
-	styleUrls: ['./agency-list-item.component.css']
+  selector: 'agencies-list',
+  templateUrl: './agency-list-item.component.html',
+  styleUrls: ['./agency-list-item.component.css']
 })
-export class AgencyListItemComponent {
+export class AgencyListItemComponent implements OnInit {
+  defaultImg: string = 'assets/images/agency.svg';
+  agencyToSearch: string = '';
+  agencyToSearchSubs!: Subscription;
 
-	defaultImg: string = 'assets/images/agency.svg';
+  @Input()
+  agencies: Agency[] = [];
+  @Input()
+  title?: string;
 
-	@Input() agencies: Agency[] = [];
-	@Input() title?: string;
+  @Output()
+  toDetail = new EventEmitter<Agency>();
 
-	@Output() toDetail = new EventEmitter<Agency>();
+  constructor(private state: AgenciesState) { }
 
-	constructor() {}
+  ngOnInit(): void {
+    this.agencyToSearchSubs = this.state.agencyToSearch
+      .pipe(debounceTime(100))
+      .subscribe(value => {
+        this.agencyToSearch = value;
+      });
+  }
 
-	goToDetail(agency: Agency) {
-		this.toDetail.emit(agency);
-	}
+  goToDetail(agency: Agency) {
+    this.toDetail.emit(agency);
+  }
+
+  ngOnDestroy(): void {
+    this.agencyToSearchSubs.unsubscribe();
+  }
 }

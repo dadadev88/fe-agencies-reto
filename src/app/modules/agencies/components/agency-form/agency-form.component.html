@@ -1,16 +1,34 @@
-
 <div class="agency-form">
-	<form [formGroup]="formAgency" (ngSubmit)="onSubmit()">
-		<app-bcp-text name="agencia" label="Nombre de agencia"></app-bcp-text>
-		<app-bcp-text name="direccion" label="Dirección"></app-bcp-text>
-		<app-bcp-text name="distrito" label="Distrito"></app-bcp-text>
-		<app-bcp-text name="lat" label="Latitud"></app-bcp-text>
-		<app-bcp-text name="lon" label="Longitud"></app-bcp-text>
-		<div class="agency-form__footer">
-			<app-bcp-button
-				[isDisabled]="formAgency.invalid"
-				[text]="isNewAgency ? 'Guardar' : 'Actualizar'">
-			</app-bcp-button>
-		</div>
-	</form>
+  <div class="agency-form__img" [class.agency-form__img--empty]="!agency?.img">
+    <img
+      [src]="agency?.img || 'assets/images/agency.svg'"
+      [alt]="agency?.agencia"
+      srcset=""
+    />
+  </div>
+  <form
+    class="agency-form__form"
+    [formGroup]="formAgency"
+    (ngSubmit)="onSubmit()"
+  >
+    <bcp-text name="agencia" label="Nombre de agencia"></bcp-text>
+    <bcp-text name="direccion" label="Dirección"></bcp-text>
+    <bcp-text name="distrito" label="Distrito"></bcp-text>
+    <bcp-text name="lat" label="Latitud"></bcp-text>
+    <bcp-text name="lon" label="Longitud"></bcp-text>
+    <div class="agency-form__footer">
+      <bcp-button
+        [isDisabled]="formAgency.invalid"
+        [text]="isNewAgency ? 'Guardar' : 'Actualizar'"
+        [isSubmit]="true"
+      >
+      </bcp-button>
+      <bcp-button
+        color="secondary"
+        (click)="goToAgenciesList()"
+        text="Cancelar"
+      >
+      </bcp-button>
+    </div>
+  </form>
 </div>

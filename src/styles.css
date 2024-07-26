@@ -1,23 +1,26 @@
 :root {
-	--cprimary: #012d74;
-	--csecondary: #ff7800;
-	--cgray: #a6a6a6;
-	--clgray: #f0f0f0;
-	--cfmprimary: #2196f3;
+  --cprimary: #002A8D;
+  --cprimary-100: #012d741a;
+  --csecondary: #ff7800;
+  --cgray: #a6a6a6;
+  --clgray: #f0f0f0;
+  --ctext: rgb(99, 99, 99);
 }
 
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	outline: 0;
-	font-family: 'BCP Regular', 'Courier New', Courier, monospace;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: 0;
+  font-family: 'BCP Regular', 'Courier New', Courier, monospace;
 }
 
-h1, h2, h3 {
-	font-family: 'BCP Bold' ,'Courier New', Courier, monospace;
+h1,
+h2,
+h3 {
+  font-family: 'BCP Bold', 'Courier New', Courier, monospace;
 }
 
 .bcp-container {
-	margin-top: 4rem;
+  margin-top: 4rem;
 }
