@@ -4,9 +4,7 @@ on:
   pull_request:
     branches:
       - develop
-    paths:
-      - 'feature/**'
-
+      
 jobs:
   build:
     runs-on: ubuntu-latest
