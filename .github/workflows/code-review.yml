@@ -1,13 +1,14 @@
 name: CI - CodeReview Action
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - develop
   pull_request:
     branches:
       - develop
-      
+
 jobs:
   build:
     runs-on: ubuntu-latest
