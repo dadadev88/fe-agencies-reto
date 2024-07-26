@@ -6,12 +6,12 @@
   border-bottom: 1px solid var(--clgray);
   transition: background-color .2s linear;
   cursor: pointer;
-  transition: transform .2s ease;
+  transition: transform .5s ease;
 }
 
 .agency-list__item:hover {
-  background-color: var(--hover-secondary, lightgray);
-  transform: translateX(3px);
+  background-color: var(--cprimary-100, lightgray);
+  transform: translateX(10px);
 }
 
 img[class*=agency-list__item] {

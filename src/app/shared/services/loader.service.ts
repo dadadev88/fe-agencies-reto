@@ -1,23 +1,28 @@
 import { Injectable } from "@angular/core";
+import { DynamicComponentService } from "./dynamic-component.service";
+import { BCPLoadingComponent } from "@shared/components/ui/bcp-loading/bcp-loading.component";
+import { DynamicLoadingProps } from "@shared/models/dynamic-component.model";
+import { DynamicLoadingData, DynamicLoadingKey } from "@shared/constants/dynamic-loading.constants";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class LoaderService {
 
-  public isLoading: boolean = true;
+  constructor(private dynamicContainer: DynamicComponentService) { }
 
-  open(): void {
-    this.isLoading = true;
+  show(key: DynamicLoadingKey = 'LO_001'): void {
+    const componentRef = this.dynamicContainer.viewContainerRef
+      .createComponent(BCPLoadingComponent);
+    const instanceComponent = componentRef.instance;
+    const props = this.getProps(key);
+    instanceComponent.setProperties(props);
   }
 
   close(): void {
-    setTimeout(() => {
-      this.isLoading = false;
-    }, this.getRamdonTime());
+    if (this.dynamicContainer.viewContainerRef.length)
+      this.dynamicContainer.viewContainerRef.clear()
   }
 
-  private getRamdonTime(): number {
-    return Math.random() * 3600;
+  getProps(keyProp: DynamicLoadingKey): DynamicLoadingProps {
+    return DynamicLoadingData[keyProp];
   }
 }

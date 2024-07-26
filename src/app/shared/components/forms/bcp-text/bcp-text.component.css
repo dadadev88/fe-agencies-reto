@@ -15,12 +15,12 @@ div.bcp-ftext label.bcp-ftext__label {
 	margin-bottom: 0.25rem;
 	display: block;
 	font-size: 14px;
-	color: var(--cfmprimary);
+	color: var(--ctext);
 }
 div.bcp-ftext input.bcp-ftext__input,
 div.bcp-ftext.bcp-ftext--womb input.bcp-ftext__input {
 	border: none;
-	border-bottom: 2px solid var(--cfmprimary);
+	border-bottom: 2px solid var(--ctext);
 	height: 35px;
 	padding: 0 .25rem;
 	font-size: 14px;

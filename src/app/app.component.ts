@@ -7,12 +7,12 @@ import { DynamicComponentService } from '@shared/services/dynamic-component.serv
 })
 export class AppComponent implements AfterViewInit {
 
-  @ViewChild('outsideContainer', { read: ViewContainerRef })
-  private dynamicContainer!: ViewContainerRef;
-
-  constructor(private dynamicService: DynamicComponentService) { }
+  constructor(
+    private dynamicService: DynamicComponentService,
+    private vcr: ViewContainerRef
+  ) { }
 
   ngAfterViewInit(): void {
-    this.dynamicService.container = this.dynamicContainer;
+    this.dynamicService.setContainer(this.vcr);
   }
 }
