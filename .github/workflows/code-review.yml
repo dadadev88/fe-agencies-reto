@@ -26,7 +26,13 @@ jobs:
     - name: Install and build
       run: |
         npm ci
-        npm run build --if-present
+        # npm run build --if-present
+        cp devops/sonar/sonar-project.properties . && ls -lha
 
     - name: Run tests
       run: npm test
+
+    - name: Official SonarQube Scan
+      uses: SonarSource/sonarqube-scan-action@v2.3.0
+
+
