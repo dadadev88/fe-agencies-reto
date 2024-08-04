@@ -49,7 +49,7 @@ jobs:
       uses: docker/build-push-action@v6
       with:
         push: true
-        tags: '${{ github.actor }}/${{ env.APP_NAME }}:latest'
+        tags: 'ghcr.io/${{ github.actor }}/${{ env.APP_NAME }}:latest'
 
 
 
