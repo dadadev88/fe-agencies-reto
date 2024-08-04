@@ -1,9 +1,8 @@
-name: Ligth Deploy to DEV (no run tests)
-run-name: Deploying to ${{ github.event.inputs.deployBranchTarget || 'develop' }} by @${{ github.actor }}
-
 env:
   APP_NAME: 'fe-agencies-reto'
-  ENVIRONMENT: DEV
+
+name: fe-agencies-reto-dev-ligth-deploy
+run-name: Deploying ${{ github.event.inputs.deployBranchTarget || 'develop' }} branch to DEV. By @${{ github.actor }}
 
 on:
   workflow_dispatch:
