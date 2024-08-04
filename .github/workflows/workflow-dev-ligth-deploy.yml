@@ -2,12 +2,12 @@ env:
   APP_NAME: 'fe-agencies-reto'
 
 name: fe-agencies-reto-dev-ligth-deploy
-run-name: Deploying ${{ github.event.inputs.deployBranchTarget || 'develop' }} branch to DEV. By @${{ github.actor }}
+run-name: Deploying ${{ github.event.inputs.targetBranch || 'develop' }} branch to DEV. By @${{ github.actor }}
 
 on:
   workflow_dispatch:
     inputs:
-      deployBranchTarget:
+      targetBranch:
         description: 'Branch to deploy. By default is develop'
         type: string
 
@@ -20,7 +20,7 @@ jobs:
     - name: Checkout to repository
       uses: actions/checkout@v4
       with:
-        ref: ${{ github.event.inputs.deployBranchTarget || 'develop' }}
+        ref: ${{ github.event.inputs.targetBranch || 'develop' }}
 
     - name: Setting NodeJS
       uses: actions/setup-node@v4
@@ -32,6 +32,7 @@ jobs:
       run: |
         npm ci
         npm run build
+        cat src/app/shared/components/ui/bcp-header/bcp-header.component.html
 
     # ! TODO: Delete
     - name: Getting package version
