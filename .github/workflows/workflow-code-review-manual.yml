@@ -1,4 +1,4 @@
-name: fe-agencies-reto-code-review-manual
+name: workflow-code-review-manual
 run-name: Analyzing ${{ github.event.inputs.targetBrach || 'develop' }} branch. By @${{ github.actor }}
 
 on:
@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-    - name: Checkout to fe-agencies-reto
+    - name: Checkout to repository
       uses: actions/checkout@v4
       with:
         ref: ${{ github.event_name == 'push' && github.ref || github.event.inputs.targetBrach }}

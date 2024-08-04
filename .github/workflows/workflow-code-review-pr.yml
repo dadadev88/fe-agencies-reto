@@ -1,4 +1,4 @@
-name: fe-agencies-reto-code-review-pr
+name: workflow-code-review-pr
 run-name: Analyzing ${{ github.ref_name }} Pull Request. By @${{ github.actor }}
 
 on:
@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-    - name: Checkout to fe-agencies-reto
+    - name: Checkout to repository
       uses: actions/checkout@v4
 
     - name: Setting NodeJS

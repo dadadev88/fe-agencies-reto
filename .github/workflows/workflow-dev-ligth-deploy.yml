@@ -1,7 +1,7 @@
 env:
   APP_NAME: 'fe-agencies-reto'
 
-name: fe-agencies-reto-dev-ligth-deploy
+name: workflow-dev-ligth-deploy
 run-name: Deploying ${{ github.event.inputs.targetBranch || 'develop' }} branch to DEV. By @${{ github.actor }}
 
 on:
