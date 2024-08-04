@@ -1,5 +1,8 @@
 name: Ligth Deploy to DEV (no run tests)
 
+env:
+  APP_NAME: 'fe-agencies-reto'
+
 on:
   workflow_dispatch:
 
@@ -31,6 +34,10 @@ jobs:
         VERSION=$(jq -r '.version' package.json)
         echo "VERSION=$VERSION" >> $GITHUB_ENV
 
+    # ! TODO: Delete
+    - name: Use version in subsequent steps
+      run: echo "The project version is ${{ env.VERSION }}"
+
     - name: Login to GitHub Container Registry
       uses: docker/login-action@v3
       with:
@@ -42,7 +49,7 @@ jobs:
       uses: docker/build-push-action@v6
       with:
         push: true
-        tags: dadadev88/{{ env.APP_NAME }}:latest
+        tags: '${{ github.actor }}/${{ env.APP_NAME }}:latest'
 
 
 
