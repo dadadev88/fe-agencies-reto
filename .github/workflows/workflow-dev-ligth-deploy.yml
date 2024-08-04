@@ -51,11 +51,20 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Build and push Docker image
-      run: |
-        echo "Building Docker image ${{ env.DOCKER_IMG_TAG }}"
-        docker build -t ${{ env.DOCKER_IMG_TAG }} .
-        echo "Pushing Docker image ${{ env.DOCKER_IMG_TAG }} to registry"
-        docker push ${{ env.DOCKER_IMG_TAG }}
+      # Usando action de Docker
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        push: true
+        tags: ${{ env.DOCKER_IMG_TAG }}
+
+      # Manualmente, el comando docker funciona ya que la instancia
+      # previamente está usando docker/login-action
+      # run: |
+      #   echo "Building Docker image ${{ env.DOCKER_IMG_TAG }}"
+      #   docker build -t ${{ env.DOCKER_IMG_TAG }} .
+      #   echo "Pushing Docker image ${{ env.DOCKER_IMG_TAG }} to registry"
+      #   docker push ${{ env.DOCKER_IMG_TAG }}
 
   Deploy:
     runs-on: self-hosted
