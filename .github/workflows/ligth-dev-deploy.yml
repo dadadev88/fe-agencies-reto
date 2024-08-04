@@ -55,7 +55,7 @@ jobs:
       uses: docker/build-push-action@v6
       with:
         push: true
-        tags: 'ghcr.io/${{ github.actor }}/dev/${{ env.APP_NAME }}:latest'
+        tags: ghcr.io/${{ github.actor }}/dev/${{ env.APP_NAME }}:latest
 
   Deploy:
     runs-on: self-hosted
@@ -64,16 +64,21 @@ jobs:
     steps:
       - name: Deploying webapp
         env:
-          DOCKER_IMG: 'ghcr.io/${{ github.actor }}/dev/${{ env.APP_NAME }}:latest'
+          DOCKER_IMG: ghcr.io/${{ github.actor }}/dev/${{ env.APP_NAME }}:latest
         run: |
 
           if [ "$(docker ps -a -q -f name=${{ env.APP_NAME }})" ]; then
             echo 'Eliminando contenedor ${{ env.APP_NAME }}'
-            'docker rm -f $(docker ps -a -q -f name=${{ env.APP_NAME }})'
+            docker rm -f $(docker ps -a -q -f name=${{ env.APP_NAME }})
           fi
 
           echo 'Creando contenedor ${{ env.APP_NAME }}'
-          'docker run -d --name ${{ env.APP_NAME }} --restart always --pull always -p 80:80 ${{ env.DOCKER_IMG }}'
+          docker run -d \
+            --name ${{ env.APP_NAME }} \
+            --restart always \
+            --pull always \
+            -p 80:80 \
+            ${{ env.DOCKER_IMG }}
 
 
 
