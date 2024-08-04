@@ -1,9 +1,17 @@
-name: CodeReview PR to Develop
+name: fe-agencies-reto-code-review-manual
+run-name: Analyzing ${{ github.event.inputs.deployBranchTarget || 'develop' }} branch. By @${{ github.actor }}
 
 on:
-  pull_request:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to analyze. By default is develop'
+        required: true
+        default: 'develop'
+        type: string
+  push:
     branches:
-      - develop
+      - 'feature/**-code-review'
 
 jobs:
   BuildTestsAndQuality:
@@ -12,6 +20,8 @@ jobs:
     steps:
     - name: Checkout to fe-agencies-reto
       uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event_name == 'push' && github.ref || github.event.inputs.branch }}
 
     - name: Setting NodeJS
       uses: actions/setup-node@v4
@@ -22,7 +32,7 @@ jobs:
     - name: Install dependencies and build
       run: |
         npm ci
-        npm build
+        npm run build
 
     - name: Run tests
       run: npm test
