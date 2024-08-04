@@ -58,7 +58,7 @@ jobs:
         tags: 'ghcr.io/${{ github.actor }}/dev/${{ env.APP_NAME }}:latest'
 
   Deploy:
-    runs-on: [self-hosted, VMQLTYCODE01]
+    runs-on: self-hosted
     needs: Build
 
     steps:
