@@ -35,15 +35,12 @@ jobs:
         npm run build
 
     # ! TODO: Delete
-    # - name: Getting package version
-    #   run: |
-    #     sudo apt-get install jq
-    #     VERSION=$(jq -r '.version' package.json)
-    #     echo "VERSION=$VERSION" >> $GITHUB_ENV
-
-    # ! TODO: Delete
-    # - name: Use version in subsequent steps
-    #   run: echo "The project version is ${{ env.VERSION }}"
+    - name: Getting package version
+      run: |
+        sudo apt-get install jq
+        VERSION=$(jq -r '.version' package.json)
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+        echo "The package version is ${{ env.VERSION }}"
 
     - name: Login to GitHub Container Registry
       uses: docker/login-action@v3
