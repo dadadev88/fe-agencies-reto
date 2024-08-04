@@ -1,5 +1,5 @@
 name: workflow-code-review-pr
-run-name: Analyzing ${{ github.ref_name }} Pull Request. By @${{ github.actor }}
+run-name: Analyzing ${{ github.ref_name }} Pull Request to develop
 
 on:
   pull_request:

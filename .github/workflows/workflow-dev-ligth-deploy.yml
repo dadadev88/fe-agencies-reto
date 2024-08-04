@@ -1,8 +1,9 @@
 env:
   APP_NAME: 'fe-agencies-reto'
+  DOCKER_IMG_TAG: ghcr.io/dadadev88/dev/fe-agencies-reto:latest
 
 name: workflow-dev-ligth-deploy
-run-name: Deploying ${{ github.event.inputs.targetBranch || 'develop' }} branch to DEV. By @${{ github.actor }}
+run-name: Deploying ${{ github.event.inputs.targetBranch || 'develop' }} branch to DEV
 
 on:
   workflow_dispatch:
@@ -50,10 +51,11 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Build and push Docker image
-      uses: docker/build-push-action@v6
-      with:
-        push: true
-        tags: ghcr.io/${{ github.actor }}/dev/${{ env.APP_NAME }}:latest
+      run: |
+        echo "Building Docker image ${{ env.DOCKER_IMG_TAG }}"
+        docker build -t ${{ env.DOCKER_IMG_TAG }} .
+        echo "Pushing Docker image ${{ env.DOCKER_IMG_TAG }} to registry"
+        docker push ${{ env.DOCKER_IMG_TAG }}
 
   Deploy:
     runs-on: self-hosted
@@ -61,8 +63,6 @@ jobs:
 
     steps:
       - name: Deploying webapp
-        env:
-          DOCKER_IMG: ghcr.io/${{ github.actor }}/dev/${{ env.APP_NAME }}:latest
         run: |
 
           if [ "$(docker ps -a -q -f name=${{ env.APP_NAME }})" ]; then
@@ -76,7 +76,7 @@ jobs:
             --restart always \
             --pull always \
             -p 80:80 \
-            ${{ env.DOCKER_IMG }}
+            ${{ env.DOCKER_IMG_TAG }}
 
 
 

@@ -1,5 +1,5 @@
 name: workflow-code-review-manual
-run-name: Analyzing ${{ github.event.inputs.targetBrach || 'develop' }} branch. By @${{ github.actor }}
+run-name: Analyzing ${{ github.event.inputs.targetBrach || 'develop' }} branch
 
 on:
   workflow_dispatch:
