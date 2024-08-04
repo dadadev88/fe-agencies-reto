@@ -1,10 +1,10 @@
 name: fe-agencies-reto-code-review-manual
-run-name: Analyzing ${{ github.event.inputs.deployBranchTarget || 'develop' }} branch. By @${{ github.actor }}
+run-name: Analyzing ${{ github.event.inputs.targetBrach || 'develop' }} branch. By @${{ github.actor }}
 
 on:
   workflow_dispatch:
     inputs:
-      branch:
+      targetBrach:
         description: 'Branch to analyze. By default is develop'
         required: true
         default: 'develop'
@@ -21,7 +21,7 @@ jobs:
     - name: Checkout to fe-agencies-reto
       uses: actions/checkout@v4
       with:
-        ref: ${{ github.event_name == 'push' && github.ref || github.event.inputs.branch }}
+        ref: ${{ github.event_name == 'push' && github.ref || github.event.inputs.targetBrach }}
 
     - name: Setting NodeJS
       uses: actions/setup-node@v4
