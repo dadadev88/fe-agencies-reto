@@ -9,7 +9,6 @@ on:
     inputs:
       branch:
         description: 'Branch to deploy. By default is develop'
-        required: true
         type: string
 
 jobs:
