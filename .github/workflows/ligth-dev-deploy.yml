@@ -1,5 +1,5 @@
 name: Ligth Deploy to DEV (no run tests)
-run-name: Deploy to ${{ inputs.deployBranchTarget }} by @${{ github.actor }}
+run-name: Deploying to ${{ github.event.inputs.deployBranchTarget || 'develop' }} by @${{ github.actor }}
 
 env:
   APP_NAME: 'fe-agencies-reto'
@@ -40,7 +40,7 @@ jobs:
         sudo apt-get install jq
         VERSION=$(jq -r '.version' package.json)
         echo "VERSION=$VERSION" >> $GITHUB_ENV
-        echo "The package version is ${{ env.VERSION }}"
+        echo "The package version is $VERSION"
 
     - name: Login to GitHub Container Registry
       uses: docker/login-action@v3
