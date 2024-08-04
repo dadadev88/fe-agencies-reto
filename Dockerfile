@@ -5,6 +5,7 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 RUN npm run build
+RUN cat src/app/shared/components/ui/bcp-header/bcp-header.component.html
 
 # Stage 2: Nginx server
 FROM nginx:alpine
