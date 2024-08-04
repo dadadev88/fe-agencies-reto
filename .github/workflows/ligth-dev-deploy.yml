@@ -1,4 +1,5 @@
 name: Ligth Deploy to DEV (no run tests)
+run-name: Deploy to ${{ inputs.deployBranchTarget }} by @${{ github.actor }}
 
 env:
   APP_NAME: 'fe-agencies-reto'
@@ -7,7 +8,7 @@ env:
 on:
   workflow_dispatch:
     inputs:
-      branch:
+      deployBranchTarget:
         description: 'Branch to deploy. By default is develop'
         type: string
 
@@ -20,7 +21,7 @@ jobs:
     - name: Checkout to repository
       uses: actions/checkout@v4
       with:
-        ref: 'develop'
+        ref: ${{ github.event.inputs.deployBranchTarget || 'develop' }}
 
     - name: Setting NodeJS
       uses: actions/setup-node@v4
