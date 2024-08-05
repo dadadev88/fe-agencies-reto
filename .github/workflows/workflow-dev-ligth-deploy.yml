@@ -15,24 +15,23 @@ on:
 jobs:
   Build:
     runs-on: ubuntu-22.04
-    environment: DEV
 
     steps:
     - name: Checkout to repository
       uses: actions/checkout@v4
       with:
         ref: ${{ github.event.inputs.targetBranch || 'develop' }}
+        
+    # - name: Setting NodeJS
+    #   uses: actions/setup-node@v4
+    #   with:
+    #     node-version: 18
+    #     cache: 'npm'
 
-    - name: Setting NodeJS
-      uses: actions/setup-node@v4
-      with:
-        node-version: 18
-        cache: 'npm'
-
-    - name: Install dependencies and build
-      run: |
-        npm ci
-        npm run build
+    # - name: Install dependencies and build
+    #   run: |
+    #     npm ci
+    #     npm run build
 
     # * TODO: Use to build docker image with version
     # - name: Getting package version
