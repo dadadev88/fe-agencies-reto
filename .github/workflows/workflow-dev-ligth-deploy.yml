@@ -15,7 +15,6 @@ on:
 jobs:
   Build:
     runs-on: ubuntu-22.04
-    environment: DEV
 
     steps:
     - name: Checkout to repository
