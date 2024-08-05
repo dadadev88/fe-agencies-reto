@@ -1,0 +1,41 @@
+name: workflow-code-review-pr
+run-name: Analyzing ${{ github.ref_name }} Pull Request to develop
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  BuildTestsAndQuality:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Checkout to repository
+      uses: actions/checkout@v4
+
+    - name: Setting NodeJS
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+        cache: 'npm'
+
+    - name: Install dependencies and build
+      run: |
+        npm ci
+        npm build
+
+    - name: Run tests
+      run: npm test
+
+    - name: Code Quality, Security and Static Analysis
+      uses: SonarSource/sonarqube-scan-action@v2.3.0
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
+      with:
+        args: >
+          -Dproject.settings=devops/sonar/sonar-project.properties
+
+
+
