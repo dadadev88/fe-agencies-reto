@@ -1,4 +1,4 @@
-name: workflow-code-review-pr
+name: workflow-cert-deploy
 run-name: Deploying develop branch to CERT
 
 env:
@@ -30,7 +30,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          sudo apt-get install jq && RC_BRANCH=RC-CERT-$(jq -r '.version' package.json)-$(date "+%Y-%m-%d-%H-%M-%S")
+          sudo apt-get install jq && RC_BRANCH=RC-CERT_$(jq -r '.version' package.json)_$(date "+%Y%m%d-%H%M%S")
           git checkout -b $RC_BRANCH
           git push origin $RC_BRANCH
 
