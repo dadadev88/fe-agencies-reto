@@ -1,9 +1,9 @@
+name: workflow-dev-ligth-deploy
+run-name: Deploying ${{ github.event.inputs.targetBranch || 'develop' }} branch to DEV
+
 env:
   APP_NAME: 'fe-agencies-reto'
   DOCKER_IMG_TAG: ghcr.io/dadadev88/dev/fe-agencies-reto:latest
-
-name: workflow-dev-ligth-deploy
-run-name: Deploying ${{ github.event.inputs.targetBranch || 'develop' }} branch to DEV
 
 on:
   workflow_dispatch:
@@ -21,17 +21,6 @@ jobs:
       uses: actions/checkout@v4
       with:
         ref: ${{ github.event.inputs.targetBranch || 'develop' }}
-        
-    # - name: Setting NodeJS
-    #   uses: actions/setup-node@v4
-    #   with:
-    #     node-version: 18
-    #     cache: 'npm'
-
-    # - name: Install dependencies and build
-    #   run: |
-    #     npm ci
-    #     npm run build
 
     # * TODO: Use to build docker image with version
     # - name: Getting package version
