@@ -1,5 +1,5 @@
 name: workflow-code-review-manual
-run-name: Analyzing ${{ github.event.inputs.targetBrach || 'develop' }} branch
+run-name: Analyzing ${{ github.event_name == 'push' && github.ref || github.event.inputs.targetBrach || 'develop' }} branch
 
 on:
   workflow_dispatch:
@@ -15,13 +15,14 @@ on:
 
 jobs:
   BuildTestsAndQuality:
+    name: Build, tests and quality code
     runs-on: ubuntu-22.04
 
     steps:
     - name: Checkout to repository
       uses: actions/checkout@v4
       with:
-        ref: ${{ github.event_name == 'push' && github.ref || github.event.inputs.targetBrach }}
+        ref: ${{ github.event_name == 'push' && github.ref || github.event.inputs.targetBrach || 'develop' }}
 
     - name: Setting NodeJS
       uses: actions/setup-node@v4
