@@ -1,4 +1,4 @@
-name: workflow-deploy-dev-ligth
+name: workflow-deploy-dev-light
 run-name: Deploying ${{ github.event.inputs.targetBranch || 'develop' }} branch to DEV
 
 env:
@@ -14,6 +14,7 @@ on:
 
 jobs:
   Build:
+    name: Building webapp
     runs-on: ubuntu-22.04
 
     steps:
@@ -45,6 +46,7 @@ jobs:
         tags: ${{ env.DOCKER_IMG_TAG }}
 
   Deploy:
+    name: Deploying webapp
     runs-on: self-hosted
     needs: Build
 
