@@ -30,8 +30,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          sudo apt-get install jq
-          git push origin RC-CERT-$(jq -r '.version' package.json)-$(date "+%Y-%m-%d-%H:%M:%S")
+          sudo apt-get install jq && RC_BRANCH=RC-CERT-$(jq -r '.version' package.json)-$(date "+%Y-%m-%d-%H-%M-%S")
+          git checkout -b $RC_BRANCH
+          git push origin $RC_BRANCH
 
       - name: Build And Deploy
         id: builddeploy
