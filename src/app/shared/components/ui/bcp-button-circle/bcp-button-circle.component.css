@@ -7,6 +7,7 @@
 	box-shadow: 3px 3px 1px 0px #b5b5b5;
 	font-size: 24px;
 	font-weight: bold;
+  color: white;
 }
 .bcp-btn-circle:hover {
 	cursor: pointer;
