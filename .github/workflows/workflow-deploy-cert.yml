@@ -1,4 +1,4 @@
-name: workflow-cert-deploy
+name: workflow-deploy-cert
 run-name: Deploying develop branch to CERT
 
 env:
