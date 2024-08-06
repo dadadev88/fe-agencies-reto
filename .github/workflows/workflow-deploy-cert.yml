@@ -5,9 +5,6 @@ env:
   APP_OUTPUR_DIR: "dist/fe-agencies-reto"
 
 on:
-  push:
-    branches:
-      - develop
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
