@@ -1,17 +1,31 @@
 name: workflow-code-review-manual
-run-name: Analyzing ${{ github.event_name == 'push' && github.ref || github.event.inputs.targetBrach || 'develop' }} branch
+run-name: Code review for "${{ github.ref_name }}" branch
 
 on:
   workflow_dispatch:
-    inputs:
-      targetBrach:
-        description: 'Branch to analyze. By default is develop'
-        required: true
-        default: 'develop'
-        type: string
-  push:
-    branches:
-      - 'feature/**-code-review'
+    # inputs: # Ejemplos de imputs
+    #   targetBrach:
+    #     description: 'Branch to analyze. By default is develop'
+    #     required: true
+    #     default: 'develop'
+    #     type: string
+    # logLevel:
+    #   description: 'Log level'
+    #   required: true
+    #   default: 'warning'
+    #   type: choice
+    #   options:
+    #   - info
+    #   - warning
+    #   - debug
+    # tags:
+    #   description: 'Test scenario tags'
+    #   required: false
+    #   type: boolean
+    # environment:
+    #   description: 'Environment to run tests against'
+    #   type: environment
+    #   required: true
 
 jobs:
   BuildTestsAndQuality:
@@ -21,8 +35,8 @@ jobs:
     steps:
     - name: Checkout to repository
       uses: actions/checkout@v4
-      with:
-        ref: ${{ github.event_name == 'push' && github.ref || github.event.inputs.targetBrach || 'develop' }}
+      # with:
+      #   ref: ${{ github.event_name == 'push' && github.ref || github.event.inputs.targetBrach || 'develop' }}
 
     - name: Setting NodeJS
       uses: actions/setup-node@v4
@@ -45,7 +59,8 @@ jobs:
         SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
       with:
         args: >
-          -Dproject.settings=devops/sonar/sonar-project.properties
+          -Dproject.settings=devops/sonar/sonar-project.properties \
+          -Dsonar.projectVersion=1.0
 
 
 
