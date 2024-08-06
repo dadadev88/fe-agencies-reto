@@ -1,16 +1,16 @@
 name: workflow-deploy-dev-light
-run-name: Deploying ${{ github.event.inputs.targetBranch || 'develop' }} branch to DEV
+run-name: Deploying ${{ github.ref_name }} branch to DEV
 
 env:
   APP_NAME: 'fe-agencies-reto'
-  DOCKER_IMG_TAG: ghcr.io/dadadev88/dev/fe-agencies-reto:latest
+  DOCKER_IMG: ghcr.io/dadadev88/dev/fe-agencies-reto
 
 on:
   workflow_dispatch:
-    inputs:
-      targetBranch:
-        description: 'Branch to deploy. By default is develop'
-        type: string
+    # inputs:
+    #   targetBranch:
+    #     description: 'Branch to deploy. By default is develop'
+    #     type: string
 
 jobs:
   Build:
@@ -20,16 +20,16 @@ jobs:
     steps:
     - name: Checkout to repository
       uses: actions/checkout@v4
-      with:
-        ref: ${{ github.event.inputs.targetBranch || 'develop' }}
+      # with:
+      #   ref: ${{ github.event.inputs.targetBranch || 'develop' }}
 
-    # * TODO: Use to build docker image with version
-    # - name: Getting package version
-    #   run: |
-    #     sudo apt-get install jq
-    #     VERSION=$(jq -r '.version' package.json)
-    #     echo "VERSION=$VERSION" >> $GITHUB_ENV
-    #     echo "The package version is $VERSION"
+
+    - name: Getting package version
+      run: |
+        sudo apt-get install jq
+        PKG_VERSION=$(jq -r '.version' package.json)
+        echo "PKG_VERSION=$PKG_VERSION" >> $GITHUB_ENV
+        echo "The package version is $PKG_VERSION"
 
     - name: Login to GitHub Container Registry
       uses: docker/login-action@v3
@@ -41,9 +41,9 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v6
       with:
-        context: .
+        # context: . # Requerido si se hace checkout a una rama diferecta a la del workflow
         push: true
-        tags: ${{ env.DOCKER_IMG_TAG }}
+        tags: ${{ env.DOCKER_IMG }}:${{ env.PKG_VERSION }}
 
   Deploy:
     name: Deploying webapp
@@ -53,7 +53,6 @@ jobs:
     steps:
       - name: Deploying webapp
         run: |
-
           if [ "$(docker ps -a -q -f name=${{ env.APP_NAME }})" ]; then
             echo 'Eliminando contenedor ${{ env.APP_NAME }}'
             docker rm -f $(docker ps -a -q -f name=${{ env.APP_NAME }})
@@ -65,7 +64,7 @@ jobs:
             --restart always \
             --pull always \
             -p 80:80 \
-            ${{ env.DOCKER_IMG_TAG }}
+            ${{ env.DOCKER_IMG }}:${{ env.PKG_VERSION }}
 
 
 

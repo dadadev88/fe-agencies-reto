@@ -1,10 +1,13 @@
 name: workflow-code-review-pr
-run-name: Analyzing ${{ github.ref }} Pull Request to develop
+run-name: Code review for "${{ github.ref_name }}" branch on Pull Request
 
 on:
   pull_request:
     branches:
       - develop
+  # push:
+  #   branches:
+  #     - 'feature/**-code-review'
 
 jobs:
   BuildTestsAndQuality:
