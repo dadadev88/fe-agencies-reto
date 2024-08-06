@@ -1,4 +1,4 @@
-name: workflow-dev-ligth-deploy
+name: workflow-deploy-dev-ligth
 run-name: Deploying ${{ github.event.inputs.targetBranch || 'develop' }} branch to DEV
 
 env:
