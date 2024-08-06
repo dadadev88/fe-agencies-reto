@@ -1,6 +1,6 @@
 header.bcp-header {
 	position: fixed;
-	top: 0;
+	bottom: 0;
 	right: 0;
 	height: 4rem;
 	width: 100vw;

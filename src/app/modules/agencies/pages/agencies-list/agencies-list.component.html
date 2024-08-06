@@ -1,11 +1,11 @@
-<bcp-header [title]="'Agencias de Lima'"></bcp-header>
+<bcp-header [title]="'Agencias de Lima (Feature)'"></bcp-header>
 <div class="agencies-list-container">
   <section class="agency-list">
-    <agencies-list
+    <bcp-agencies-list-items
       *ngIf="controller.agencies.length; else notFoundAgencies"
       [agencies]="controller.agencies"
       (toDetail)="controller.goToDetail($event)"
-    ></agencies-list>
+    ></bcp-agencies-list-items>
     <ng-template #notFoundAgencies>
       <h3 class="agencies-list__notfound">
         No existen agencias según valor indicado

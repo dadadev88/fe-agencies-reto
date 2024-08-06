@@ -3,7 +3,7 @@ import { LoaderService } from '@shared/services/loader.service';
 import { AgenciesController } from '../../controllers/agencies.controller';
 
 @Component({
-  selector: 'agencies',
+  selector: 'bcp-agencies-list',
   templateUrl: './agencies-list.component.html',
   styleUrls: ['./agencies-list.component.css']
 })

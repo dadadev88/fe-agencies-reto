@@ -9,7 +9,7 @@ export class LoaderService {
 
   constructor(private dynamicContainer: DynamicComponentService) { }
 
-  show(key: DynamicLoadingKey = 'LO_001'): void {
+  show(key: DynamicLoadingKey = 'BCP'): void {
     const componentRef = this.dynamicContainer.viewContainerRef
       .createComponent(BCPLoadingComponent);
     const instanceComponent = componentRef.instance;
