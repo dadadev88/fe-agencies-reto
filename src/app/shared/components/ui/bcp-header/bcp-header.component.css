@@ -1,10 +1,10 @@
 header.bcp-header {
 	position: fixed;
-	bottom: 0;
+	top: 0;
 	right: 0;
 	height: 4rem;
 	width: 100vw;
-	background-color: var(--csecondary);
+	background-color: var(--cprimary);
 	color: #fff;
 	display: flex;
 	align-items: center;
