@@ -16,6 +16,8 @@ jobs:
   Build:
     name: Building webapp
     runs-on: ubuntu-22.04
+    outputs:
+      PKG_VERSION: ${{ steps.pkg-version.outputs.PKG_VERSION }}
 
     steps:
     - name: Checkout to repository
@@ -23,14 +25,13 @@ jobs:
       # with:
       #   ref: ${{ github.event.inputs.targetBranch || 'develop' }}
 
-
+    # echo "PKG_VERSION=$PKG_VERSION" >> $GITHUB_ENV -> $\{{ env.PKG_VERSION }}
     - name: Getting package version
-      # echo "PKG_VERSION=$PKG_VERSION" >> $GITHUB_ENV
-      # Para exportar al entorno de Github y poder usar en otros pasos del job (no se comparte con otros jobs)
+      id: pkg-version
       run: |
         sudo apt-get install jq && PKG_VERSION=$(jq -r '.version' package.json)
         echo "The package version is $PKG_VERSION"
-        echo "::set-output name=PKG_VERSION::$(echo $PKG_VERSION)"
+        echo "PKG_VERSION=$PKG_VERSION" >> $GITHUB_OUTPUT
 
     - name: Login to GitHub Container Registry
       uses: docker/login-action@v3
@@ -44,7 +45,7 @@ jobs:
       with:
         # context: . # Requerido si se hace checkout a una rama diferecta a la del workflow
         push: true
-        tags: ${{ env.DOCKER_IMG }}:${{ env.PKG_VERSION }}
+        tags: ${{ env.DOCKER_IMG }}:${{ steps.pkg-version.outputs.PKG_VERSION }}
 
   Deploy:
     name: Deploying webapp
