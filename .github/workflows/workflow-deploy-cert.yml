@@ -5,6 +5,9 @@ env:
   APP_OUTPUR_DIR: "dist/fe-agencies-reto"
 
 on:
+  push:
+    branches:
+      - develop
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
@@ -23,13 +26,14 @@ jobs:
           submodules: true
           lfs: false
 
-      - name: Push release
+      - name: Push release candidate
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           sudo apt-get install jq && RC_BRANCH=RC-CERT_$(jq -r '.version' package.json)_$(date "+%Y%m%d-%H%M%S")
           git checkout -b $RC_BRANCH
           git push origin $RC_BRANCH
+          echo "Release candidate generated -> $RC_BRANCH"
 
       - name: Build And Deploy
         id: builddeploy
