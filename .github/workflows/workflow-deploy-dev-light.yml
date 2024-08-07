@@ -25,11 +25,12 @@ jobs:
 
 
     - name: Getting package version
+      # echo "PKG_VERSION=$PKG_VERSION" >> $GITHUB_ENV
+      # Para exportar al entorno de Github y poder usar en otros pasos del job (no se comparte con otros jobs)
       run: |
-        sudo apt-get install jq
-        PKG_VERSION=$(jq -r '.version' package.json)
-        echo "PKG_VERSION=$PKG_VERSION" >> $GITHUB_ENV
+        sudo apt-get install jq && PKG_VERSION=$(jq -r '.version' package.json)
         echo "The package version is $PKG_VERSION"
+        echo "::set-output name=PKG_VERSION::$(echo $PKG_VERSION)"
 
     - name: Login to GitHub Container Registry
       uses: docker/login-action@v3
@@ -64,7 +65,7 @@ jobs:
             --restart always \
             --pull always \
             -p 80:80 \
-            ${{ env.DOCKER_IMG }}:${{ env.PKG_VERSION }}
+            ${{ env.DOCKER_IMG }}:${{ needs.Build.outputs.PKG_VERSION }}
 
 
 
