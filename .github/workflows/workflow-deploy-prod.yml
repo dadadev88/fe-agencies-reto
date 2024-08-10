@@ -19,11 +19,23 @@ jobs:
     name: Branch validation
     runs-on: ubuntu-latest
 
+    steps:
+      - name: Validaing branch
+        env:
+          TARGET_BRANCH: ${{ github.event.inputs.targetBranch }}
+        run: |
+          TARGET_BRANCH=${{ github.event.inputs.targetBranch }}
+          if [[ $TARGET_BRANCH == RC-CERT* ]]  && ! git branch | grep "$TARGET_BRANCH" ]; then
+            echo "No existe rama $TARGET_BRANCH"
+            exit 1
+          fi
+
   BuildAndDeploy:
     if: ${{ startsWith(github.event.inputs.targetBranch, 'RC-CERT') || github.event.inputs.targetBranch == 'master' }}
     name: Build and Deploy Web App
     runs-on: ubuntu-latest
     environment: PROD
+    needs: BranchValidation
 
     steps:
     - name: Checkout to branch
