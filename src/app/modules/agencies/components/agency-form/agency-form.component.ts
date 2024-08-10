@@ -7,7 +7,7 @@ import { AgenciesController } from '../../controllers/agencies.controller';
 import { Agency } from '../../interfaces/agency-list-item.interface';
 
 @Component({
-  selector: 'agency-form',
+  selector: 'bcp-agency-form',
   templateUrl: './agency-form.component.html',
   styleUrls: ['./agency-form.component.css']
 })

@@ -5,7 +5,7 @@ import { Agency } from '../../interfaces/agency-list-item.interface';
 import AgenciesState from '../../services/agencies-state.service';
 
 @Component({
-  selector: 'agencies-list',
+  selector: 'bcp-agencies-list-items',
   templateUrl: './agency-list-item.component.html',
   styleUrls: ['./agency-list-item.component.css']
 })

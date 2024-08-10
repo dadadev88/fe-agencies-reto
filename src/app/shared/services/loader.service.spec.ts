@@ -13,6 +13,20 @@ describe('@LoaderService', () => {
     service = new LoaderService(dynamicContainer);
   });
 
+  describe('When call show loader', () => {
+
+    beforeEach(() => {
+      (dynamicContainer.viewContainerRef.createComponent as jasmine.Spy).and.returnValue({
+        instance: { setProperties: jasmine.createSpy() }
+      });
+    });
+
+    it('#Should call createComponent', () => {
+      service.show();
+      expect(dynamicContainer.viewContainerRef.createComponent).toHaveBeenCalled();
+    })
+  });
+
   it('#Should call clear when container has content (component)', () => {
     Object.defineProperty(dynamicContainer.viewContainerRef, 'length', { value: 1 });
     service.close();

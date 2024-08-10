@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AgenciesController } from '../../controllers/agencies.controller';
 
 @Component({
-  selector: 'agencies-detail-page',
+  selector: 'bcp-agencies-detail-page',
   templateUrl: './agencies-detail.component.html'
 })
 export class AgenciesDetailPageComponent implements OnInit {
