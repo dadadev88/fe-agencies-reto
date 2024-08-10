@@ -1,5 +1,5 @@
 name: workflow-deploy-prod
-run-name: Deploying ${{ github.ref_name }} branch to PROD. Branches = HEAD <${{ github.head_ref }}> | BASE <${{ github.base_ref }}>
+run-name: Deploying ${{ github.head_ref }} RC to PROD
 
 on:
   push:
@@ -15,7 +15,7 @@ env:
 
 jobs:
   BuildAndDeploy:
-    if: ${{ startsWith(github.head_ref, 'RC-CERT') && github.base_ref == 'master' }}
+    if: ${{ github.event_name == 'push' || startsWith(github.head_ref, 'RC-CERT') && github.base_ref == 'master' }}
     name: Build and Deploy Web App
     runs-on: ubuntu-latest
     environment: PROD
