@@ -1,19 +1,26 @@
 name: workflow-deploy-prod
-run-name: Deploying ${{ github.head_ref }} to PROD
+run-name: Deploying "${{ github.event.inputs.targetBranch }}" to PROD
 
 on:
-  pull_request:
-    types: [opened, synchronize]
-    branches:
-      - master
+  workflow_dispatch:
+    inputs:
+      targetBranch:
+        description: 'Branch to deploy. By default is master'
+        required: true
+        default: 'master'
+        type: string
 
 env:
   AZURE_WEBAPP_NAME: wappeusbcptip01
   DOCKER_IMG: ghcr.io/dadadev88/fe-agencies-reto
 
 jobs:
+  BranchValidation:
+    name: Branch validation
+    runs-on: ubuntu-latest
+
   BuildAndDeploy:
-    if: ${{ github.event_name == 'push' || startsWith(github.head_ref, 'RC-CERT') && github.base_ref == 'master' }}
+    if: ${{ startsWith(github.event.inputs.targetBranch, 'RC-CERT') || github.event.inputs.targetBranch == 'master' }}
     name: Build and Deploy Web App
     runs-on: ubuntu-latest
     environment: PROD
@@ -21,6 +28,8 @@ jobs:
     steps:
     - name: Checkout to branch
       uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event.inputs.targetBranch || 'master' }}
 
     - name: Login to GitHub Container Registry
       uses: docker/login-action@v3
@@ -32,12 +41,13 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v6
       with:
+        context: .
         push: true
-        tags: ${{ env.DOCKER_IMG }}:${{ github.head_ref }}
+        tags: ${{ env.DOCKER_IMG }}:${{ github.event.inputs.targetBranch }}
 
     - name: 'Deploy to Azure WebApp'
       uses: azure/webapps-deploy@v3
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        images: ${{ env.DOCKER_IMG }}:${{ github.head_ref }}
+        images: ${{ env.DOCKER_IMG }}:${{ github.event.inputs.targetBranch }}
