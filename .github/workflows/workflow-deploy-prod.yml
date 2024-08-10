@@ -11,6 +11,14 @@ env:
   DOCKER_IMG: ghcr.io/dadadev88/fe-agencies-reto
 
 jobs:
+  Validation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Branches validations
+        run: |
+          echo "Branches = HEAD <${{ github.head_ref }}> | BASE <${{ github.base_ref }}>"
+          echo "${{ startsWith(github.head_ref, 'RC-CERT') && github.base_ref == 'master' }}"
+
   BuildAndDeploy:
     if: ${{ startsWith(github.head_ref, 'RC-CERT') && github.base_ref == 'master' }}
     name: Build and Deploy
