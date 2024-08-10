@@ -1,13 +1,13 @@
 name: workflow-code-review-pr
-run-name: Code review for "${{ github.ref_name }}" branch on Pull Request
+run-name: Code review for "${{ github.head_ref }}" branch on Pull Request
+
+env:
+  SONAR_CLOUD_ORG: 'dadadev88'
 
 on:
   pull_request:
     branches:
       - develop
-  # push:
-  #   branches:
-  #     - 'feature/**-code-review'
 
 jobs:
   BuildTestsAndQuality:
@@ -32,14 +32,15 @@ jobs:
     - name: Run tests
       run: npm test
 
-    - name: Code Quality, Security and Static Analysis
-      uses: SonarSource/sonarqube-scan-action@v2.3.0
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@v2.3.0
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
       with:
         args: >
           -Dproject.settings=devops/sonar/sonar-project.properties
+          -Dsonar.organization=${{ env.SONAR_CLOUD_ORG }}
+          -Dsonar.projectVersion=1.0
 
 
 

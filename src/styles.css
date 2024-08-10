@@ -7,6 +7,10 @@
   --ctext: rgb(99, 99, 99);
 }
 
+body {
+  background-color: #fbfbfb;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -19,8 +23,4 @@ h1,
 h2,
 h3 {
   font-family: 'BCP Bold', 'Courier New', Courier, monospace;
-}
-
-.bcp-container {
-  margin-top: 4rem;
 }

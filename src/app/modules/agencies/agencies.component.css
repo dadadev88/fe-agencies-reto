@@ -1,16 +1,17 @@
 .bcp-agencies-container {
-  padding-top: 1rem;
+  margin-top: 70px;
+  /* padding-top: 1rem;
   padding-bottom: 60px;
   height: 90vh;
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: hidden; */
 }
 
 @media (min-width: 768px) {
 
   .bcp-agencies-container {
-    width: 70%;
-    margin: auto;
+    width: 60%;
+    margin: 70px auto;
   }
 
 }
