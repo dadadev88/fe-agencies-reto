@@ -2,27 +2,21 @@ name: workflow-deploy-prod
 run-name: Deploying ${{ github.ref_name }} branch to PROD. Branches = HEAD <${{ github.head_ref }}> | BASE <${{ github.base_ref }}>
 
 on:
+  push:
+    branches: [master]
   pull_request:
     types: [opened]
     branches:
       - master
 
 env:
-  AZURE_WEBAPP_NAME: wappeus2bcptip01
+  AZURE_WEBAPP_NAME: wappeusbcptip01
   DOCKER_IMG: ghcr.io/dadadev88/fe-agencies-reto
 
 jobs:
-  Validation:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Branches validations
-        run: |
-          echo "Branches = HEAD <${{ github.head_ref }}> | BASE <${{ github.base_ref }}>"
-          echo "${{ startsWith(github.head_ref, 'RC-CERT') && github.base_ref == 'master' }}"
-
   BuildAndDeploy:
     if: ${{ startsWith(github.head_ref, 'RC-CERT') && github.base_ref == 'master' }}
-    name: Build and Deploy
+    name: Build and Deploy Web App
     runs-on: ubuntu-latest
     environment: PROD
 
