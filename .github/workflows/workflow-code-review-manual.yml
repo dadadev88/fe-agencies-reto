@@ -1,6 +1,9 @@
 name: workflow-code-review-manual
 run-name: Code review for "${{ github.ref_name }}" branch
 
+env:
+  SONAR_CLOUD_ORG: 'dadadev88'
+
 on:
   workflow_dispatch:
     # inputs: # Ejemplos de imputs
@@ -52,15 +55,25 @@ jobs:
     - name: Run tests
       run: npm test
 
-    - name: Code Quality, Security and Static Analysis
-      uses: SonarSource/sonarqube-scan-action@v2.3.0
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@v2.3.0
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
       with:
         args: >
           -Dproject.settings=devops/sonar/sonar-project.properties
+          -Dsonar.organization=${{ env.SONAR_CLOUD_ORG }}
           -Dsonar.projectVersion=1.0
+
+    # - name: Code Quality, Security and Static Analysis
+    #   uses: SonarSource/sonarqube-scan-action@v2.3.0
+    #   env:
+    #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    #     SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
+    #   with:
+    #     args: >
+    #       -Dproject.settings=devops/sonar/sonar-project.properties
+    #       -Dsonar.projectVersion=1.0
 
 
 
