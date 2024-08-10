@@ -3,6 +3,7 @@ run-name: Deploying ${{ github.ref_name }} branch to PROD. Branches = HEAD <${{ 
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened]
     branches:
       - master
 
