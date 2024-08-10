@@ -1,9 +1,7 @@
 name: workflow-deploy-prod
-run-name: Deploying ${{ github.head_ref }} RC to PROD
+run-name: Deploying ${{ github.head_ref }} to PROD
 
 on:
-  push:
-    branches: [master]
   pull_request:
     types: [opened]
     branches:
