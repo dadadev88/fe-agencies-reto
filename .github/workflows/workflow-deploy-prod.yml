@@ -3,7 +3,7 @@ run-name: Deploying ${{ github.head_ref }} to PROD
 
 on:
   pull_request:
-    types: [opened]
+    types: [opened, synchronize]
     branches:
       - master
 
