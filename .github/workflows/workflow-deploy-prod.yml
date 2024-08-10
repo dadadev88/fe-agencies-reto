@@ -4,7 +4,7 @@ run-name: Deploying ${{ github.ref_name }} branch to PROD. Branches = HEAD <${{ 
 on:
   pull_request:
     branches:
-      - 'RC-CERT**'
+      - master
 
 env:
   AZURE_WEBAPP_NAME: wappeus2bcptip01
