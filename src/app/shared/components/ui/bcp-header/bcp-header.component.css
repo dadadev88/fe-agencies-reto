@@ -4,7 +4,7 @@ header.bcp-header {
 	right: 0;
 	height: 4rem;
 	width: 100vw;
-	background-color: var(--csecondary);
+	background-color: var(--cprimary);
 	color: #fff;
 	display: flex;
 	align-items: center;

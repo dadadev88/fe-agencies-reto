@@ -37,7 +37,7 @@ export class AgenciesController extends AgenciesStorageController {
   }
 
   goToDetail(agency: Agency = {} as Agency) {
-    this.loader.show('LO_001')
+    this.loader.show()
     this.setCurrentAgency(agency);
     setTimeout(() => {
       this.router.navigate([RoutesAgenciesApp.detail]);
