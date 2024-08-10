@@ -1,10 +1,14 @@
 :root {
-  --cprimary: #002A8D;
-  --cprimary-100: #012d741a;
-  --csecondary: #ff0004;
+  --cprimary: #2fb199;
+  --cprimary-100: #049b671a;
+  --csecondary: #ff8f2b;
   --cgray: #a6a6a6;
   --clgray: #f0f0f0;
   --ctext: rgb(99, 99, 99);
+}
+
+body {
+  background-color: #fbfbfb;
 }
 
 * {
@@ -19,8 +23,4 @@ h1,
 h2,
 h3 {
   font-family: 'BCP Bold', 'Courier New', Courier, monospace;
-}
-
-.bcp-container {
-  margin-top: 4rem;
 }

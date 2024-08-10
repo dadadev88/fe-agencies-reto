@@ -1,31 +1,11 @@
 name: workflow-code-review-manual
 run-name: Code review for "${{ github.ref_name }}" branch
 
+env:
+  SONAR_CLOUD_ORG: 'dadadev88'
+
 on:
   workflow_dispatch:
-    # inputs: # Ejemplos de imputs
-    #   targetBrach:
-    #     description: 'Branch to analyze. By default is develop'
-    #     required: true
-    #     default: 'develop'
-    #     type: string
-    # logLevel:
-    #   description: 'Log level'
-    #   required: true
-    #   default: 'warning'
-    #   type: choice
-    #   options:
-    #   - info
-    #   - warning
-    #   - debug
-    # tags:
-    #   description: 'Test scenario tags'
-    #   required: false
-    #   type: boolean
-    # environment:
-    #   description: 'Environment to run tests against'
-    #   type: environment
-    #   required: true
 
 jobs:
   BuildTestsAndQuality:
@@ -35,8 +15,6 @@ jobs:
     steps:
     - name: Checkout to repository
       uses: actions/checkout@v4
-      # with:
-      #   ref: ${{ github.event_name == 'push' && github.ref || github.event.inputs.targetBrach || 'develop' }}
 
     - name: Setting NodeJS
       uses: actions/setup-node@v4
@@ -52,15 +30,12 @@ jobs:
     - name: Run tests
       run: npm test
 
-    - name: Code Quality, Security and Static Analysis
-      uses: SonarSource/sonarqube-scan-action@v2.3.0
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@v2.3.0
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
       with:
         args: >
           -Dproject.settings=devops/sonar/sonar-project.properties
+          -Dsonar.organization=${{ env.SONAR_CLOUD_ORG }}
           -Dsonar.projectVersion=1.0
-
-
-

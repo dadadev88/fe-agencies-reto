@@ -2,7 +2,8 @@ import { DynamicLoadingProps } from "@shared/models/dynamic-component.model";
 
 export enum DynamicLoadingKeys {
   LO_001 = 'LO_001',
-  LO_GOOGLE = 'LO_GOOGLE'
+  LO_GOOGLE = 'LO_GOOGLE',
+  BCP = 'BCP'
 }
 
 export type DynamicLoadingKey = keyof typeof DynamicLoadingKeys;
@@ -15,5 +16,9 @@ export const DynamicLoadingData: { [K in DynamicLoadingKey]: DynamicLoadingProps
   LO_GOOGLE: {
     message: 'Buscando información',
     image: 'loading-google.gif'
+  },
+  BCP: {
+    message: 'Buscando información',
+    image: 'bcp-logo.png'
   }
 };
