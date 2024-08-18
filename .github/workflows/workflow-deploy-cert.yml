@@ -21,7 +21,8 @@ jobs:
     environment: CERT
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout to develop branch
+        uses: actions/checkout@v3
         with:
           submodules: true
           lfs: false
@@ -40,20 +41,32 @@ jobs:
   BuildRC:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
-    name: Close Pull Request Job
+    name: Create RC
     environment: CERT
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout to develop branch
+        uses: actions/checkout@v3
         with:
           submodules: true
           lfs: false
 
+      - name: Getting package information
+        uses: dadadev88/node-package-info@v1.0.0
+        id: node-package-info
+        with:
+          path: 'package.json'
+
       - name: Push release candidate
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PKG_NAME: ${{ steps.node-package-info.outputs.name }}
+          PKG_VERSION: ${{ steps.node-package-info.outputs.version }}
         run: |
-          sudo apt-get install jq && RC_BRANCH=RC-CERT_$(jq -r '.version' package.json)_$(date "+%Y%m%d-%H%M%S")
+          echo "Package name: $PKG_NAME"
+          echo "Package version: $PKG_VERSION"
+
+          RC_BRANCH="RC-CERT_${PKG_NAME}_${PKG_VERSION}_$(date "+%Y%m%d-%H%M%S")"
           git checkout -b $RC_BRANCH
           git push origin $RC_BRANCH
           echo "Release candidate generated -> $RC_BRANCH"
@@ -63,12 +76,12 @@ jobs:
     runs-on: ubuntu-latest
     name: Close Pull Request Job
     environment: CERT
-    needs: BuildRC
 
     steps:
       - name: Close Pull Request
         id: closepullrequest
         uses: Azure/static-web-apps-deploy@v1
         with:
+          app_location: "/"
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           action: "close"

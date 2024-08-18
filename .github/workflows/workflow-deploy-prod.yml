@@ -1,25 +1,56 @@
 name: workflow-deploy-prod
-run-name: Deploying ${{ github.ref_name }} branch to PROD. Branches = HEAD <${{ github.head_ref }}> | BASE <${{ github.base_ref }}>
+run-name: Deploying "${{ github.event.inputs.targetBranch }}" to PROD
 
 on:
-  pull_request:
-    branches:
-      - 'RC-CERT**'
+  workflow_dispatch:
+    inputs:
+      targetBranch:
+        description: 'RC to deploy'
+        required: true
+        type: string
 
 env:
-  AZURE_WEBAPP_NAME: wappeus2bcptip01
+  AZURE_WEBAPP_NAME: wappeusbcptip01
   DOCKER_IMG: ghcr.io/dadadev88/fe-agencies-reto
 
 jobs:
+  BranchValidation:
+    name: Branch validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Validate RC branch name
+        env:
+          TARGET_BRANCH: ${{ github.event.inputs.targetBranch }}
+        run: |
+          hasError=0
+          if ! [[ $TARGET_BRANCH == RC-CERT* ]]; then
+            hasError=1
+            echo "La rama a desplegar debe ser una de Release Candidate, esta debe empezar con las siglas 'RC-CERT'"
+          fi
+          if ! git branch | grep "$TARGET_BRANCH"; then
+            hasError=1
+            echo "No existe rama $TARGET_BRANCH"
+          fi
+          if [[ $hasError -eq 1 ]]; then
+            echo "Rama $TARGET_BRANCH no válida"
+            exit 1
+          else
+            echo "Rama $TARGET_BRANCH validada correctamente, continuará con job BuildAndDeploy"
+          fi
+
   BuildAndDeploy:
-    if: ${{ startsWith(github.head_ref, 'RC-CERT') && github.base_ref == 'master' }}
-    name: Build and Deploy
+    if: ${{ startsWith(github.event.inputs.targetBranch, 'RC-CERT') || github.event.inputs.targetBranch == 'master' }}
+    name: Build and Deploy Web App
     runs-on: ubuntu-latest
     environment: PROD
+    needs: BranchValidation
 
     steps:
     - name: Checkout to branch
       uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event.inputs.targetBranch || 'master' }}
 
     - name: Login to GitHub Container Registry
       uses: docker/login-action@v3
@@ -31,12 +62,13 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v6
       with:
+        context: .
         push: true
-        tags: ${{ env.DOCKER_IMG }}:${{ github.head_ref }}
+        tags: ${{ env.DOCKER_IMG }}:${{ github.event.inputs.targetBranch }}
 
     - name: 'Deploy to Azure WebApp'
       uses: azure/webapps-deploy@v3
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        images: ${{ env.DOCKER_IMG }}:${{ github.head_ref }}
+        images: ${{ env.DOCKER_IMG }}:${{ github.event.inputs.targetBranch }}
