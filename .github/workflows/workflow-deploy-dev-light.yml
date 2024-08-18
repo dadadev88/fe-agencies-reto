@@ -7,10 +7,6 @@ env:
 
 on:
   workflow_dispatch:
-    # inputs:
-    #   targetBranch:
-    #     description: 'Branch to deploy. By default is develop'
-    #     type: string
 
 jobs:
   Build:
@@ -22,10 +18,7 @@ jobs:
     steps:
     - name: Checkout to repository
       uses: actions/checkout@v4
-      # with:
-      #   ref: ${{ github.event.inputs.targetBranch || 'develop' }}
 
-    # echo "PKG_VERSION=$PKG_VERSION" >> $GITHUB_ENV -> $\{{ env.PKG_VERSION }}
     - name: Getting package version
       id: pkg-version
       run: |
@@ -43,7 +36,6 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v6
       with:
-        # context: . # Requerido si se hace checkout a una rama diferecta a la del workflow
         push: true
         tags: ${{ env.DOCKER_IMG }}:${{ steps.pkg-version.outputs.PKG_VERSION }}
 

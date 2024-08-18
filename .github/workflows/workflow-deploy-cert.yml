@@ -21,7 +21,7 @@ jobs:
     environment: CERT
 
     steps:
-      - name: Checkout to develop branch
+      - name: Checkout to repository
         uses: actions/checkout@v3
         with:
           submodules: true
@@ -45,7 +45,7 @@ jobs:
     environment: CERT
 
     steps:
-      - name: Checkout to develop branch
+      - name: Checkout to repository
         uses: actions/checkout@v3
         with:
           submodules: true
@@ -66,10 +66,10 @@ jobs:
           echo "Package name: $PKG_NAME"
           echo "Package version: $PKG_VERSION"
 
-          RC_BRANCH="RC-CERT_${PKG_NAME}_${PKG_VERSION}_$(date "+%Y%m%d-%H%M%S")"
-          git checkout -b $RC_BRANCH
-          git push origin $RC_BRANCH
-          echo "Release candidate generated -> $RC_BRANCH"
+          RC_TAG="RC-CERT_${PKG_NAME}_${PKG_VERSION}_$(date "+%Y%m%d-%H%M%S")"
+          git tag -a $RC_TAG -m "New release candidate tag -> $RC_TAG"
+          git push origin $RC_TAG
+          echo "Release candidate tag generated -> $RC_TAG"
 
   ClosePullRequestJob:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
