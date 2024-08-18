@@ -67,6 +67,7 @@ jobs:
           echo "Package version: $PKG_VERSION"
 
           RC_TAG="RC-CERT_${PKG_NAME}_${PKG_VERSION}_$(date "+%Y%m%d-%H%M%S")"
+          git checkout -b "release/$RC_BRANCH"
           git tag -a $RC_TAG -m "New release candidate tag -> $RC_TAG"
           git push origin $RC_TAG
           echo "Release candidate tag generated -> $RC_TAG"
