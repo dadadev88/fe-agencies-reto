@@ -5,9 +5,8 @@ on:
   workflow_dispatch:
     inputs:
       targetBranch:
-        description: 'Branch to deploy. By default is master'
+        description: 'RC to deploy'
         required: true
-        default: 'master'
         type: string
 
 env:
@@ -20,14 +19,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Validaing branch
+      - name: Validate RC branch name
         env:
           TARGET_BRANCH: ${{ github.event.inputs.targetBranch }}
         run: |
-          TARGET_BRANCH=${{ github.event.inputs.targetBranch }}
-          if [[ $TARGET_BRANCH == RC-CERT* ]]  && ! git branch | grep "$TARGET_BRANCH" ]; then
+          hasError=0
+          if ! [[ $TARGET_BRANCH == RC-CERT* ]]; then
+            hasError=1
+            echo "La rama a desplegar debe ser una de Release Candidate, esta debe empezar con las siglas 'RC-CERT'"
+          fi
+          if ! git branch | grep "$TARGET_BRANCH"; then
+            hasError=1
             echo "No existe rama $TARGET_BRANCH"
+          fi
+          if [[ $hasError -eq 1 ]]; then
+            echo "Rama $TARGET_BRANCH no válida"
             exit 1
+          else
+            echo "Rama $TARGET_BRANCH validada correctamente, continuará con job BuildAndDeploy"
           fi
 
   BuildAndDeploy:
