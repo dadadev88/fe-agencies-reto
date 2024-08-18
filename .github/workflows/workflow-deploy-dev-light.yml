@@ -7,10 +7,6 @@ env:
 
 on:
   workflow_dispatch:
-    # inputs:
-    #   targetBranch:
-    #     description: 'Branch to deploy. By default is develop'
-    #     type: string
 
 jobs:
   Build:
@@ -22,10 +18,7 @@ jobs:
     steps:
     - name: Checkout to repository
       uses: actions/checkout@v4
-      # with:
-      #   ref: ${{ github.event.inputs.targetBranch || 'develop' }}
 
-    # echo "PKG_VERSION=$PKG_VERSION" >> $GITHUB_ENV -> $\{{ env.PKG_VERSION }}
     - name: Getting package version
       id: pkg-version
       run: |
