@@ -67,6 +67,8 @@ jobs:
           echo "Package version: $PKG_VERSION"
 
           RC_TAG="RC-CERT_${PKG_NAME}_${PKG_VERSION}_$(date "+%Y%m%d-%H%M%S")"
+          git config --global user.email "ghactionsuser.${{ github.repository_owner }}@github.com"
+          git config --global user.name "Github Actions User (${{ github.repository_owner }})"
           git tag -a $RC_TAG -m "New release candidate tag -> $RC_TAG"
           git push origin $RC_TAG
           echo "Release candidate tag generated -> $RC_TAG"
