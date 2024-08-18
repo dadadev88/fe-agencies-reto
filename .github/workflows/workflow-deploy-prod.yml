@@ -1,11 +1,11 @@
 name: workflow-deploy-prod
-run-name: Deploying "${{ github.event.inputs.targetBranch }}" to PROD
+run-name: Deploying "${{ github.event.inputs.tag }}" to PROD
 
 on:
   workflow_dispatch:
     inputs:
-      targetBranch:
-        description: 'RC to deploy'
+      tag:
+        description: 'RC tag to deploy'
         required: true
         type: string
 
@@ -19,9 +19,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout to repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.tag }}
+
       - name: Validate RC branch name
         env:
-          TARGET_BRANCH: ${{ github.event.inputs.targetBranch }}
+          TARGET_BRANCH: ${{ github.event.inputs.tag }}
         run: |
           hasError=0
           if ! [[ $TARGET_BRANCH == RC-CERT* ]]; then
@@ -40,17 +45,17 @@ jobs:
           fi
 
   BuildAndDeploy:
-    if: ${{ startsWith(github.event.inputs.targetBranch, 'RC-CERT') || github.event.inputs.targetBranch == 'master' }}
+    if: ${{ startsWith(github.event.inputs.tag, 'RC-CERT') }}
     name: Build and Deploy Web App
     runs-on: ubuntu-latest
     environment: PROD
     needs: BranchValidation
 
     steps:
-    - name: Checkout to branch
+    - name: Checkout to repository
       uses: actions/checkout@v4
       with:
-        ref: ${{ github.event.inputs.targetBranch || 'master' }}
+        ref: ${{ github.event.inputs.tag }}
 
     - name: Login to GitHub Container Registry
       uses: docker/login-action@v3
@@ -64,11 +69,11 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ env.DOCKER_IMG }}:${{ github.event.inputs.targetBranch }}
+        tags: ${{ env.DOCKER_IMG }}:${{ github.event.inputs.tag }}
 
     - name: 'Deploy to Azure WebApp'
       uses: azure/webapps-deploy@v3
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        images: ${{ env.DOCKER_IMG }}:${{ github.event.inputs.targetBranch }}
+        images: ${{ env.DOCKER_IMG }}:${{ github.event.inputs.tag }}

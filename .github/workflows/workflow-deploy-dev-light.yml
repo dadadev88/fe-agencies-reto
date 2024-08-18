@@ -36,7 +36,6 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v6
       with:
-        # context: . # Requerido si se hace checkout a una rama diferecta a la del workflow
         push: true
         tags: ${{ env.DOCKER_IMG }}:${{ steps.pkg-version.outputs.PKG_VERSION }}
 
