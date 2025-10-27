@@ -4,8 +4,8 @@
       {{ title }}
     </div>
     <div class="bcp-header__form" *ngIf="showInput">
+      <!-- (keyupEmmiter)="keyupInputSearch($event)" -->
       <bcp-text
-        (keyupEmmiter)="keyupInputSearch($event)"
         [hasFG]="false"
         [addBM]="false"
         placeholder="Buscar agencia"

@@ -13,6 +13,11 @@
     </ng-template>
   </section>
   <div class="agencies-list__footer">
-    <bcp-button-circle (click)="controller.goToDetail()"></bcp-button-circle>
+    <bcp-button-circle style="margin-right: var(--sz8);" (click)="openModal()">
+      &#x2632;
+    </bcp-button-circle>
+    <bcp-button-circle color="secondary" (click)="controller.goToDetail()">
+      &#65122;
+    </bcp-button-circle>
   </div>
 </div>

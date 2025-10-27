@@ -1,5 +1,5 @@
 .bcp-agencies-container {
-  margin-top: 70px;
+  margin-top: var(--sz70);
   /* padding-top: 1rem;
   padding-bottom: 60px;
   height: 90vh;
@@ -11,7 +11,7 @@
 
   .bcp-agencies-container {
     width: 60%;
-    margin: 70px auto;
+    margin: var(--sz70) auto;
   }
 
 }

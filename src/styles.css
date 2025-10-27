@@ -1,10 +1,25 @@
 :root {
-  --cprimary: #00cec1;
-  --cprimary-100: #00c8be19;
+  --cprimary: #1730ba;
+  --cprimary-100: #0074ff0a;
   --csecondary: #ed7e00;
   --cgray: #a6a6a6;
   --clgray: #f0f0f0;
   --ctext: rgb(99, 99, 99);
+  --sz8: 8px;
+  --sz16: 16px;
+  --sz24: 24px;
+  --sz32: 32px;
+  --sz40: 40px;
+  --sz48: 48px;
+  --sz56: 56px;
+  --sz62: 62px;
+  --sz70: 70px;
+  /* Breakpoints */
+  --bpxs: 320px;
+  --bpsm: 600px;
+  --bpmd: 768px;
+  --bplg: 992px;
+  --bpxl: 1200px;
 }
 
 body {
@@ -23,4 +38,16 @@ h1,
 h2,
 h3 {
   font-family: 'BCP Bold', 'Courier New', Courier, monospace;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 20%, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
 }

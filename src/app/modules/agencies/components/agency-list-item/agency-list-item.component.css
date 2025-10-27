@@ -30,7 +30,7 @@ img[class*=agency-list__item] {
 }
 
 .agency-list__item-info>p {
-  margin-bottom: .1rem;
+  margin-bottom: var(--sz8);
 }
 
 .agency-list__item-info> :nth-child(1) {

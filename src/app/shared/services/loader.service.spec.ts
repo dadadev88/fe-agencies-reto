@@ -1,35 +1,35 @@
 import { TestBed } from '@angular/core/testing';
 import { LoaderService } from './loader.service';
-import { DynamicComponentService } from './dynamic-component.service';
+import { AppVCR } from './app-vcr.service';
 
 describe('@LoaderService', () => {
   let service: LoaderService;
-  let dynamicContainer: jasmine.SpyObj<DynamicComponentService>;
+  let appVcr: jasmine.SpyObj<AppVCR>;
 
   beforeEach(() => {
-    dynamicContainer = jasmine.createSpyObj('DynamicComponentService', {}, {
+    appVcr = jasmine.createSpyObj('DynamicComponentService', {}, {
       viewContainerRef: jasmine.createSpyObj('ViewContainerRef', ['createComponent', 'clear'])
     });
-    service = new LoaderService(dynamicContainer);
+    service = new LoaderService(appVcr);
   });
 
   describe('When call show loader', () => {
 
     beforeEach(() => {
-      (dynamicContainer.viewContainerRef.createComponent as jasmine.Spy).and.returnValue({
+      (appVcr.viewContainerRef.createComponent as jasmine.Spy).and.returnValue({
         instance: { setProperties: jasmine.createSpy() }
       });
     });
 
     it('#Should call createComponent', () => {
       service.show();
-      expect(dynamicContainer.viewContainerRef.createComponent).toHaveBeenCalled();
+      expect(appVcr.viewContainerRef.createComponent).toHaveBeenCalled();
     })
   });
 
   it('#Should call clear when container has content (component)', () => {
-    Object.defineProperty(dynamicContainer.viewContainerRef, 'length', { value: 1 });
+    Object.defineProperty(appVcr.viewContainerRef, 'length', { value: 1 });
     service.close();
-    expect(dynamicContainer.viewContainerRef.clear).toHaveBeenCalled();
+    expect(appVcr.viewContainerRef.clear).toHaveBeenCalled();
   });
 });

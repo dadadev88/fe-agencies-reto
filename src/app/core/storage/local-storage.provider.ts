@@ -1,5 +1,5 @@
 export class LocalStorageProvider<T> {
-  private key: string;
+  private readonly key: string;
 
   constructor(key: string) {
     this.key = key;
@@ -10,7 +10,7 @@ export class LocalStorageProvider<T> {
   }
 
   getValue(): T {
-    return JSON.parse(localStorage.getItem(this.key) || '[]');
+    return JSON.parse(localStorage.getItem(this.key) ?? '[]');
   }
 
 }

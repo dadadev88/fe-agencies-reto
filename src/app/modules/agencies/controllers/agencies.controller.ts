@@ -6,21 +6,23 @@ import { Agency } from "../interfaces/agency-list-item.interface";
 import { RoutesAgenciesApp } from "@constants/routes.constants";
 import AgenciesState from "../services/agencies-state.service";
 import AgenciesStorageController from "./agencies-storage.controller";
+import { delay } from "rxjs/operators";
 
 @Injectable()
 export class AgenciesController extends AgenciesStorageController {
 
   constructor(
-    private agencyServices: AgenciesService,
-    private state: AgenciesState,
-    private router: Router,
-    private loader: LoaderService
+    private readonly agencyServices: AgenciesService,
+    private readonly state: AgenciesState,
+    private readonly router: Router,
+    private readonly loader: LoaderService
   ) {
     super();
   }
 
   onInit() {
     this.getAgencies();
+    this.setCurrentAgency(null);
     this.loader.close();
   }
 
@@ -36,7 +38,7 @@ export class AgenciesController extends AgenciesStorageController {
     return this.state.agencies;
   }
 
-  goToDetail(agency: Agency = {} as Agency) {
+  goToDetail(agency: Agency | null = null) {
     this.loader.show()
     this.setCurrentAgency(agency);
     setTimeout(() => {
@@ -47,7 +49,7 @@ export class AgenciesController extends AgenciesStorageController {
   private getAgencies() {
     const agenciesLS = this.getAllFromLS();
     if (!agenciesLS.length) {
-      this.agencyServices.getAllFromDataFile().subscribe(agenciesFile => {
+      this.agencyServices.getAllFromDataFile().pipe(delay(5000)).subscribe(agenciesFile => {
         const newAgencies = agenciesFile.map(agency => {
           return { ...agency, id: this.generateId(agency.agencia) };
         });

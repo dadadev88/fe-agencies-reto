@@ -5,15 +5,17 @@ import { AgenciesDetailPageComponent } from './pages/agencies-detail/agencies-de
 import { AgenciesListPageComponent } from './pages/agencies-list/agencies-list.component';
 
 const agenciesRoutes: Routes = [
-	{ path: '', component: AgenciesComponent, children: [
-		{ path: '', pathMatch: 'full', redirectTo: 'listado' },
-		{ path: 'listado', component: AgenciesListPageComponent },
-		{ path: 'detalle', component: AgenciesDetailPageComponent }
-	]}
+  {
+    path: '', component: AgenciesComponent, children: [
+      { path: '', pathMatch: 'full', redirectTo: 'listado' },
+      { path: 'listado', component: AgenciesListPageComponent },
+      { path: 'detalle', component: AgenciesDetailPageComponent }
+    ]
+  }
 ];
 
 @NgModule({
-	imports: [ RouterModule.forChild(agenciesRoutes) ],
-	exports: [ RouterModule]
+  imports: [RouterModule.forChild(agenciesRoutes)],
+  exports: [RouterModule]
 })
 export class AgenciesRoutingModule { }

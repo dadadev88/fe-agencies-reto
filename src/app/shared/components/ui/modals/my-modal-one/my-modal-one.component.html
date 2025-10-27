@@ -1,0 +1,25 @@
+<div #modal class="modal">
+  <div class="modal-content fadeInUp">
+    <!-- Modal header -->
+    <div class="modal-header">
+      <h2 class="modal-title">{{ inputs.title }}</h2>
+      <button class="close-button" (click)="closeModal()">&times;</button>
+    </div>
+
+    <!-- Modal body -->
+    <div class="modal-body">
+      {{ inputs.description }}
+    </div>
+
+    <!-- Modal footer -->
+    <div class="modal-footer">
+      <bcp-button
+        color="secondary"
+        text="Cancelar" (click)="closeModal()">
+      </bcp-button>
+      <bcp-button
+        text="Confirmar" (click)="confirmAction()">
+      </bcp-button>
+    </div>
+  </div>
+</div>

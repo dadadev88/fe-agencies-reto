@@ -1,6 +1,6 @@
 div.bcp-ftext {
 	position: relative;
-	margin-bottom: 20px;
+	margin-bottom: var(--sz24);
 }
 div.bcp-ftext.bcp-ftext--womb {
 	border-bottom: 2px solid transparent;

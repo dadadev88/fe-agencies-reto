@@ -1,18 +1,22 @@
 import { AfterViewInit, Component, ViewChild, ViewContainerRef } from '@angular/core';
-import { DynamicComponentService } from '@shared/services/dynamic-component.service';
+import { AppVCR } from '@shared/services/app-vcr.service';
 
 @Component({
-  selector: 'root',
+  selector: 'agencies-reto-root',
   templateUrl: './app.component.html'
 })
 export class AppComponent implements AfterViewInit {
 
+  @ViewChild('appSiblingContainer', { read: ViewContainerRef })
+  appSiblingContainer!: ViewContainerRef;
+
   constructor(
-    private dynamicService: DynamicComponentService,
-    private vcr: ViewContainerRef
-  ) { }
+    private readonly appVcr: AppVCR,
+  ) {
+    console.log('AppComponent constructor');
+  }
 
   ngAfterViewInit(): void {
-    this.dynamicService.setContainer(this.vcr);
+    this.appVcr.setContainer(this.appSiblingContainer);
   }
 }

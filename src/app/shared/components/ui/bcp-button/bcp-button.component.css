@@ -7,7 +7,7 @@
 	border-radius: 3px;
 	box-shadow: 3px 3px 1px 0px #b5b5b5;
 	cursor: pointer;
-  margin: .5rem 1rem;
+  margin: var(--sz8);
 }
 .bcp-button:hover {
 	opacity: 0.9;

@@ -13,7 +13,6 @@ const INITIAL_STATE: IAgencyState = {
 }
 
 @Injectable()
-// @State
 export default class AgenciesState {
 
   private data!: IAgencyState;
@@ -36,15 +35,3 @@ export default class AgenciesState {
   setAgencyToSearch(value: string): void { this.agencyToSearch.next(value); }
 
 }
-
-/* interface StateMetaData {
-  name: string;
-  initialState: unknown;
-
-}
-
-function State(constructor: Function) {
-  console.log('Esto es un decorador');
-  console.log({ constructor });
-}
- */
